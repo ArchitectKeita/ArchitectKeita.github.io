@@ -1,0 +1,299 @@
+<title>Keita — Cloud Operations</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single column, left-aligned, documentation-style. Mono labels act as resource identifiers. */
+:root{
+  --bg:#0c0e12;
+  --surface:#13161c;
+  --line:#242934;
+  --fg:#e6e8ec;
+  --muted:#8e95a3;
+  --accent:#e0a33e;
+  --accent-dim:#5a4420;
+  color-scheme:dark;
+
+  --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#fbfaf8; --surface:#ffffff; --line:#e3e0d9;
+    --fg:#16181d; --muted:#64697a; --accent:#9a6b12; --accent-dim:#f0e3c8;
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#fbfaf8; --surface:#ffffff; --line:#e3e0d9;
+  --fg:#16181d; --muted:#64697a; --accent:#9a6b12; --accent-dim:#f0e3c8;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:var(--body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:860px; margin:0 auto;
+  padding-left:max(20px,env(safe-area-inset-left,0px));
+  padding-right:max(20px,env(safe-area-inset-right,0px));
+  padding-block:0;
+}
+a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-dim)}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+
+/* ---- masthead ---- */
+header{padding-block:72px 48px; border-bottom:1px solid var(--line)}
+.mark{
+  font-family:var(--mono); font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted); display:flex; gap:12px; align-items:center;
+  margin-bottom:28px;
+}
+.mark b{color:var(--accent); font-weight:500}
+h1{
+  font-family:var(--display); font-weight:700; font-size:clamp(40px,8vw,68px);
+  line-height:1.02; letter-spacing:-.025em; margin:0 0 14px; text-wrap:balance;
+}
+.role{
+  font-family:var(--display); font-weight:500; font-size:clamp(17px,3vw,21px);
+  color:var(--accent); margin:0 0 22px; letter-spacing:-.01em;
+}
+.lede{font-size:17px; max-width:62ch; color:var(--fg); margin:0 0 30px}
+.lede .q{color:var(--muted)}
+.contact{display:flex; flex-wrap:wrap; gap:10px 26px; font-family:var(--mono); font-size:13px}
+.contact span{color:var(--muted)}
+
+/* ---- sections ---- */
+section{padding-block:52px; border-bottom:1px solid var(--line)}
+.eyebrow{
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); margin:0 0 6px;
+}
+h2{
+  font-family:var(--display); font-weight:600; font-size:clamp(23px,4vw,30px);
+  letter-spacing:-.018em; margin:0 0 26px; text-wrap:balance;
+}
+h3{font-family:var(--display); font-weight:600; font-size:17px; letter-spacing:-.01em; margin:0}
+
+/* ---- project ---- */
+.diagram{
+  background:var(--surface); border:1px solid var(--line); border-radius:3px;
+  padding:26px 18px; margin-bottom:28px; overflow-x:auto;
+}
+.diagram svg{display:block; min-width:520px; max-width:100%; margin:0 auto; height:auto}
+.built{display:grid; gap:18px; margin-bottom:30px}
+@media (min-width:660px){.built{grid-template-columns:1fr 1fr; gap:18px 34px}}
+.built div{min-width:0}
+.built h3{margin-bottom:7px}
+.built p{margin:0; color:var(--muted); font-size:15px}
+
+.broke{border-left:2px solid var(--accent); padding:2px 0 2px 20px; display:grid; gap:16px}
+.broke p{margin:0; font-size:15px}
+.broke .t{font-family:var(--mono); font-size:12px; color:var(--accent); letter-spacing:.04em; display:block; margin-bottom:3px}
+.broke .t + span{color:var(--muted)}
+
+/* ---- stack ---- */
+.stack{display:grid; gap:20px}
+@media (min-width:660px){.stack{grid-template-columns:repeat(2,1fr); gap:22px 34px}}
+.stack div{min-width:0}
+.stack dt{
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:7px;
+}
+.stack dd{margin:0; font-size:14.5px; color:var(--muted); line-height:1.65}
+
+/* ---- experience ---- */
+.job{display:grid; gap:3px; padding-block:17px; border-top:1px solid var(--line)}
+.job:first-of-type{border-top:0; padding-top:0}
+@media (min-width:660px){
+  .job{grid-template-columns:1fr auto; align-items:baseline; column-gap:24px}
+  .job .when{grid-column:2; grid-row:1}
+  .job .what{grid-column:1 / -1}
+}
+.job .org{color:var(--muted); font-weight:500}
+.when{font-family:var(--mono); font-size:12px; color:var(--muted); white-space:nowrap}
+.what{margin:3px 0 0; font-size:14.5px; color:var(--muted); min-width:0}
+
+/* ---- footer ---- */
+footer{padding-block:46px 64px; display:flex; flex-wrap:wrap; gap:14px 30px; align-items:baseline}
+footer .note{font-family:var(--mono); font-size:12px; color:var(--muted)}
+.kanji{color:var(--accent); font-size:15px}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="mark"><b>建</b> <span>us-east-1 · prince george's county, md</span></p>
+  <h1>Ibrahim Keita</h1>
+  <p class="role">Cloud Operations &amp; Infrastructure Support</p>
+  <p class="lede">Two years of enterprise IT — Active Directory, Microsoft 365, endpoint deployment, escalated troubleshooting. Now building AWS infrastructure and breaking it on purpose to see what holds. <span class="q">Studying for the Solutions Architect Associate.</span></p>
+  <p class="contact">
+    <a href="mailto:ibrahimkeita70@gmail.com">ibrahimkeita70@gmail.com</a>
+    <a href="#">GitHub</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Résumé (PDF)</a>
+  </p>
+</header>
+
+<section>
+  <p class="eyebrow">Project 01 — AWS, self-directed</p>
+  <h2>A web tier that heals itself</h2>
+
+  <div class="diagram">
+    <svg viewBox="0 0 560 236" role="img" aria-label="Architecture: internet traffic reaches an Application Load Balancer, which distributes to an Auto Scaling Group of EC2 instances across two Availability Zones; instances read from a private S3 bucket using an IAM role.">
+      <defs>
+        <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L8 4 L0 8 z" fill="currentColor"/>
+        </marker>
+      </defs>
+      <g font-family="JetBrains Mono, monospace" font-size="10" fill="currentColor" color="var(--muted)">
+
+        <!-- AZ containers -->
+        <rect x="186" y="14" width="150" height="94" rx="2" fill="none" stroke="var(--line)" stroke-dasharray="3 3"/>
+        <text x="194" y="28" fill="var(--muted)">us-east-1a</text>
+        <rect x="186" y="128" width="150" height="94" rx="2" fill="none" stroke="var(--line)" stroke-dasharray="3 3"/>
+        <text x="194" y="142" fill="var(--muted)">us-east-1b</text>
+
+        <!-- internet -->
+        <text x="8" y="114" fill="var(--muted)">internet</text>
+
+        <!-- ALB -->
+        <rect x="74" y="92" width="76" height="52" rx="2" fill="var(--bg)" stroke="var(--accent)"/>
+        <text x="112" y="114" text-anchor="middle" fill="var(--accent)">ALB</text>
+        <text x="112" y="128" text-anchor="middle" fill="var(--muted)" font-size="9">:80</text>
+
+        <!-- EC2 a -->
+        <rect x="206" y="42" width="110" height="46" rx="2" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="261" y="62" text-anchor="middle" fill="var(--fg)">EC2</text>
+        <text x="261" y="76" text-anchor="middle" fill="var(--muted)" font-size="9">apache</text>
+
+        <!-- EC2 b -->
+        <rect x="206" y="156" width="110" height="46" rx="2" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="261" y="176" text-anchor="middle" fill="var(--fg)">EC2</text>
+        <text x="261" y="190" text-anchor="middle" fill="var(--muted)" font-size="9">apache</text>
+
+        <!-- ASG bracket -->
+        <path d="M344 46 h10 v150 h-10" fill="none" stroke="var(--line)"/>
+        <text x="360" y="118" fill="var(--muted)">ASG</text>
+        <text x="360" y="131" fill="var(--muted)" font-size="9">min 2</text>
+
+        <!-- S3 -->
+        <rect x="438" y="92" width="110" height="52" rx="2" fill="var(--bg)" stroke="var(--line)"/>
+        <text x="493" y="112" text-anchor="middle" fill="var(--fg)">S3</text>
+        <text x="493" y="126" text-anchor="middle" fill="var(--muted)" font-size="9">private</text>
+
+        <!-- arrows -->
+        <g stroke="var(--muted)" fill="none" marker-end="url(#ar)">
+          <path d="M52 110 H68"/>
+          <path d="M152 110 C174 110 172 65 200 65"/>
+          <path d="M152 112 C174 112 172 179 200 179"/>
+          <path d="M376 118 H432"/>
+        </g>
+        <text x="404" y="110" text-anchor="middle" fill="var(--accent)" font-size="9">IAM role</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="built">
+    <div>
+      <h3>High availability</h3>
+      <p>An internet-facing Application Load Balancer distributes traffic to an Auto Scaling Group spanning two Availability Zones. Losing a zone does not lose the site.</p>
+    </div>
+    <div>
+      <h3>No static credentials</h3>
+      <p>Instances read from a private S3 bucket through an IAM role and instance profile scoped to one bucket ARN. No access keys stored anywhere on the host.</p>
+    </div>
+    <div>
+      <h3>Boot-time provisioning</h3>
+      <p>A launch template and user data script install Apache and pull application content from S3 on first boot, so a replacement instance is identical to the one it replaced.</p>
+    </div>
+    <div>
+      <h3>Health checks that mean something</h3>
+      <p>ELB health checks on the Auto Scaling Group, so an application returning errors gets replaced — not just a host that stopped responding.</p>
+    </div>
+  </div>
+
+  <p class="eyebrow">What broke, and why</p>
+  <div class="broke">
+    <p><span class="t">terminated an instance in us-east-1a</span><span>The ASG launched a replacement and the ALB re-registered it. No loss of availability during the swap.</span></p>
+    <p><span class="t">boot-time S3 pull failed silently</span><span>The launch template had no IAM instance profile attached. The instance came up healthy at the OS level and served nothing — a reminder that a passing EC2 status check is not a passing application.</span></p>
+    <p><span class="t">timeout vs. connection refused</span><span>A timeout points at the security group or the network path. A refusal means the packet arrived and nothing was listening. Knowing which one you have cuts the search in half.</span></p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Stack</p>
+  <h2>What I work in</h2>
+  <dl class="stack">
+    <div>
+      <dt>AWS</dt>
+      <dd>EC2 · Auto Scaling Groups · Launch Templates · Application Load Balancer · Target Groups &amp; health checks · S3 bucket policies &amp; Block Public Access · IAM roles, policies, instance profiles · Security Groups · Multi-AZ design · AWS CLI</dd>
+    </div>
+    <div>
+      <dt>Systems &amp; identity</dt>
+      <dd>Active Directory · Microsoft 365 · Intune · user account and access management · VPN</dd>
+    </div>
+    <div>
+      <dt>Operations</dt>
+      <dd>ServiceNow · ticket triage and escalation · imaging and workstation deployment · remote support</dd>
+    </div>
+    <div>
+      <dt>Platforms</dt>
+      <dd>Linux (Amazon Linux 2023) · Apache/httpd · Bash and EC2 user data scripting · Windows</dd>
+    </div>
+  </dl>
+</section>
+
+<section>
+  <p class="eyebrow">Experience</p>
+  <h2>Where I've worked</h2>
+
+  <div class="job">
+    <h3>Systems Technician <span class="org">· Kyndryl</span></h3>
+    <p class="when">Nov 2025 — Jul 2026</p>
+    <p class="what">High-volume ticket resolution for an on-site enterprise client. Imaged and deployed workstations across the organization and supported enterprise infrastructure.</p>
+  </div>
+
+  <div class="job">
+    <h3>IT Administrator <span class="org">· OTT HydroMet</span></h3>
+    <p class="when">Jul 2025 — Oct 2025</p>
+    <p class="what">Day-to-day IT operations. Managed accounts and access in Active Directory, supported Microsoft 365, and served as first point of contact for IT requests including remote support and VPN.</p>
+  </div>
+
+  <div class="job">
+    <h3>IT Support Specialist II <span class="org">· Bloomberg Industry Group</span></h3>
+    <p class="when">Nov 2024 — Jul 2025</p>
+    <p class="what">Escalated issues past first-line support. Worked with engineering teams on complex hardware, software, and systems problems.</p>
+  </div>
+
+  <div class="job">
+    <h3>Data Entry Specialist <span class="org">· M-NCPPC</span></h3>
+    <p class="when">Feb 2020 — Jul 2024</p>
+    <p class="what">Four and a half years maintaining the accuracy and integrity of departmental records.</p>
+  </div>
+</section>
+
+<section>
+  <p class="eyebrow">Credentials</p>
+  <h2>In progress</h2>
+  <div class="job">
+    <h3>AWS Certified Solutions Architect — Associate</h3>
+    <p class="when">exam target · Feb 2027</p>
+    <p class="what">SAA-C03. Through compute, load balancing, and auto scaling; working into databases and storage.</p>
+  </div>
+  <div class="job">
+    <h3>A.S. Aerospace Engineering <span class="org">· Montgomery College</span></h3>
+    <p class="when">Nov 2025</p>
+  </div>
+</section>
+
+<footer>
+  <span class="note"><span class="kanji">建</span> &nbsp;built to be rebuilt</span>
+  <span class="note">ibrahimkeita70@gmail.com</span>
+</footer>
+
+</div>
