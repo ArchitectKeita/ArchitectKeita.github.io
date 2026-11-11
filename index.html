@@ -1,199 +1,220 @@
 <title>Keita — Cloud Operations</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: single column, left-aligned, documentation-style. Mono labels act as resource identifiers. */
+/* Layout: single column, documentation-style. Console aesthetic — grid, glow, mono identifiers. */
 :root{
-  --bg:#0c0e12;
-  --surface:#13161c;
-  --line:#242934;
-  --fg:#e6e8ec;
-  --muted:#8e95a3;
-  --accent:#e0a33e;
-  --accent-dim:#5a4420;
+  --bg:#06080d;
+  --surface:#0d1118;
+  --surface-2:#11161f;
+  --line:#1a2029;
+  --line-bright:#28313f;
+  --fg:#eceff4;
+  --muted:#707b8f;
+  --accent:#36e0d0;
+  --accent-deep:#0f8f86;
+  --accent-glow:rgba(54,224,208,.14);
+  --accent-faint:rgba(54,224,208,.09);
   color-scheme:dark;
 
   --display:'Archivo','Helvetica Neue',Arial,sans-serif;
   --body:'Inter',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
 }
-@media (prefers-color-scheme:light){
-  :root:not([data-theme="dark"]){
-    --bg:#fbfaf8; --surface:#ffffff; --line:#e3e0d9;
-    --fg:#16181d; --muted:#64697a; --accent:#9a6b12; --accent-dim:#f0e3c8;
-    color-scheme:light;
-  }
-}
-:root[data-theme="light"]{
-  --bg:#fbfaf8; --surface:#ffffff; --line:#e3e0d9;
-  --fg:#16181d; --muted:#64697a; --accent:#9a6b12; --accent-dim:#f0e3c8;
-  color-scheme:light;
-}
 
 *{box-sizing:border-box}
+
 body{
-  background:var(--bg); color:var(--fg);
-  font-family:var(--body); font-size:16px; line-height:1.6;
+  margin:0;
+  background:var(--bg);
+  background-image:
+    radial-gradient(1200px 620px at 50% -200px, var(--accent-glow), transparent 68%),
+    repeating-linear-gradient(0deg,transparent 0 55px,rgba(255,255,255,.016) 55px 56px),
+    repeating-linear-gradient(90deg,transparent 0 55px,rgba(255,255,255,.016) 55px 56px);
+  background-attachment:fixed;
+  color:var(--fg);
+  font-family:var(--body); font-size:16px; line-height:1.62;
   -webkit-font-smoothing:antialiased;
 }
+
 .wrap{
-  max-width:860px; margin:0 auto;
+  max-width:880px; margin:0 auto;
   padding-left:max(20px,env(safe-area-inset-left,0px));
   padding-right:max(20px,env(safe-area-inset-right,0px));
   padding-block:0;
 }
-a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-dim)}
-a:hover{border-bottom-color:var(--accent)}
+
+a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-deep); transition:border-color .15s,color .15s}
+a:hover{border-bottom-color:var(--accent); color:#6ff0e3}
 a:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
 
 /* ---- masthead ---- */
-header{padding-block:72px 48px; border-bottom:1px solid var(--line)}
-.mark{
-  font-family:var(--mono); font-size:12px; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--muted); display:flex; gap:12px; align-items:center;
-  margin-bottom:28px;
+header{padding-block:84px 52px; border-bottom:1px solid var(--line)}
+
+.pill{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-family:var(--mono); font-size:10.5px; font-weight:500;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--accent);
+  border:1px solid var(--accent-deep); border-radius:999px;
+  padding:.45rem .85rem; background:var(--accent-faint);
+  margin-bottom:30px;
 }
-.mark b{color:var(--accent); font-weight:500}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 var(--accent);opacity:1}
+  70%{box-shadow:0 0 0 8px transparent;opacity:.65}
+  100%{box-shadow:0 0 0 0 transparent;opacity:1}
+}
+
 h1{
-  font-family:var(--display); font-weight:700; font-size:clamp(40px,8vw,68px);
-  line-height:1.02; letter-spacing:-.025em; margin:0 0 14px; text-wrap:balance;
+  font-family:var(--display); font-weight:800; font-size:clamp(44px,9vw,76px);
+  line-height:.98; letter-spacing:-.035em; margin:0 0 16px; text-wrap:balance;
+  background:linear-gradient(170deg,#ffffff 20%,#9fb0c4 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 .role{
-  font-family:var(--display); font-weight:500; font-size:clamp(17px,3vw,21px);
-  color:var(--accent); margin:0 0 22px; letter-spacing:-.01em;
+  font-family:var(--mono); font-weight:500; font-size:clamp(13px,2.6vw,15px);
+  color:var(--accent); margin:0 0 26px; letter-spacing:.02em;
 }
-.lede{font-size:17px; max-width:62ch; color:var(--fg); margin:0 0 30px}
+.lede{font-size:17.5px; max-width:60ch; margin:0 0 34px; color:#c3cad6}
 .lede .q{color:var(--muted)}
-.contact{display:flex; flex-wrap:wrap; gap:10px 26px; font-family:var(--mono); font-size:13px}
-.contact span{color:var(--muted)}
+.contact{display:flex; flex-wrap:wrap; gap:10px 26px; font-family:var(--mono); font-size:13px; margin:0}
 
 /* ---- sections ---- */
-section{padding-block:52px; border-bottom:1px solid var(--line)}
+section{padding-block:60px; border-bottom:1px solid var(--line)}
 .eyebrow{
-  font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--muted); margin:0 0 6px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.19em; text-transform:uppercase;
+  color:var(--accent); margin:0 0 10px;
 }
 h2{
-  font-family:var(--display); font-weight:600; font-size:clamp(23px,4vw,30px);
-  letter-spacing:-.018em; margin:0 0 26px; text-wrap:balance;
+  font-family:var(--display); font-weight:700; font-size:clamp(25px,4.4vw,34px);
+  letter-spacing:-.025em; margin:0 0 28px; text-wrap:balance;
 }
-h3{font-family:var(--display); font-weight:600; font-size:17px; letter-spacing:-.01em; margin:0}
 
 /* ---- project ---- */
 .diagram{
-  background:var(--surface); border:1px solid var(--line); border-radius:3px;
-  padding:26px 18px; margin-bottom:28px; overflow-x:auto;
+  position:relative;
+  background:
+    radial-gradient(520px 200px at 50% 0%, var(--accent-faint), transparent 70%),
+    var(--surface);
+  border:1px solid var(--line-bright); border-radius:6px;
+  padding:30px 18px; margin-bottom:32px; overflow-x:auto;
 }
 .diagram svg{display:block; min-width:520px; max-width:100%; margin:0 auto; height:auto}
-.built{display:grid; gap:18px; margin-bottom:30px}
-@media (min-width:660px){.built{grid-template-columns:1fr 1fr; gap:18px 34px}}
+
+.built{display:grid; gap:22px; margin-bottom:34px}
+@media (min-width:660px){.built{grid-template-columns:1fr 1fr; gap:24px 36px}}
 .built div{min-width:0}
-.built h3{margin-bottom:7px}
+.built h3{font-family:var(--display); font-weight:600; font-size:17px; letter-spacing:-.012em; margin:0 0 8px}
 .built p{margin:0; color:var(--muted); font-size:15px}
 
-.broke{border-left:2px solid var(--accent); padding:2px 0 2px 20px; display:grid; gap:16px}
+.broke{
+  border-left:2px solid var(--accent-deep); padding:4px 0 4px 22px;
+  display:grid; gap:18px;
+}
 .broke p{margin:0; font-size:15px}
-.broke .t{font-family:var(--mono); font-size:12px; color:var(--accent); letter-spacing:.04em; display:block; margin-bottom:3px}
+.broke .t{
+  font-family:var(--mono); font-size:11.5px; color:var(--accent);
+  letter-spacing:.05em; display:block; margin-bottom:4px;
+}
 .broke .t + span{color:var(--muted)}
 
 /* ---- stack ---- */
-.stack{display:grid; gap:20px}
-@media (min-width:660px){.stack{grid-template-columns:repeat(2,1fr); gap:22px 34px}}
+.stack{display:grid; gap:22px}
+@media (min-width:660px){.stack{grid-template-columns:repeat(2,1fr); gap:24px 36px}}
 .stack div{min-width:0}
 .stack dt{
-  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--accent); margin-bottom:7px;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:9px;
 }
-.stack dd{margin:0; font-size:14.5px; color:var(--muted); line-height:1.65}
+.stack dd{margin:0; font-size:14.5px; color:var(--muted); line-height:1.7}
 
 /* ---- experience ---- */
-.job{display:grid; gap:3px; padding-block:17px; border-top:1px solid var(--line)}
+.job{display:grid; gap:3px; padding-block:19px; border-top:1px solid var(--line)}
 .job:first-of-type{border-top:0; padding-top:0}
 @media (min-width:660px){
-  .job{grid-template-columns:1fr auto; align-items:baseline; column-gap:24px}
+  .job{grid-template-columns:1fr auto; align-items:baseline; column-gap:26px}
   .job .when{grid-column:2; grid-row:1}
   .job .what{grid-column:1 / -1}
 }
+.job h3{font-family:var(--display); font-weight:600; font-size:17px; letter-spacing:-.012em; margin:0}
 .job .org{color:var(--muted); font-weight:500}
-.when{font-family:var(--mono); font-size:12px; color:var(--muted); white-space:nowrap}
-.what{margin:3px 0 0; font-size:14.5px; color:var(--muted); min-width:0}
+.when{font-family:var(--mono); font-size:11.5px; color:var(--muted); white-space:nowrap}
+.what{margin:4px 0 0; font-size:14.5px; color:var(--muted); min-width:0}
 
 /* ---- footer ---- */
-footer{padding-block:46px 64px; display:flex; flex-wrap:wrap; gap:14px 30px; align-items:baseline}
-footer .note{font-family:var(--mono); font-size:12px; color:var(--muted)}
+footer{
+  padding-block:52px 72px;
+  display:flex; flex-wrap:wrap; gap:14px 30px; align-items:baseline;
+}
+footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.04em}
 .kanji{color:var(--accent); font-size:15px}
+
+@media (prefers-reduced-motion:reduce){.dot{animation:none}}
 </style>
 
 <div class="wrap">
 
 <header>
-  <p class="mark"><b>建</b> <span>us-east-1 · prince george's county, md</span></p>
+  <span class="pill"><span class="dot"></span>open to cloud roles</span>
   <h1>Ibrahim Keita</h1>
-  <p class="role">Cloud Operations &amp; Infrastructure Support</p>
+  <p class="role">cloud operations &nbsp;/&nbsp; infrastructure support &nbsp;/&nbsp; us-east-1</p>
   <p class="lede">Two years of enterprise IT — Active Directory, Microsoft 365, endpoint deployment, escalated troubleshooting. Now building AWS infrastructure and breaking it on purpose to see what holds. <span class="q">Studying for the Solutions Architect Associate.</span></p>
   <p class="contact">
     <a href="mailto:ibrahimkeita70@gmail.com">ibrahimkeita70@gmail.com</a>
     <a href="https://github.com/ArchitectKeita">GitHub</a>
     <a href="https://www.linkedin.com/in/ibrahim-keita-981065216/">LinkedIn</a>
     <a href="Ibrahim_Keita_Resume_Cloud.pdf">Résumé (PDF)</a>
-  </p> 
+  </p>
 </header>
 
 <section>
-    <p class="eyebrow">Project 01 — AWS, self-directed · <a href="https://github.com/ArchitectKeita/aws-ha-web-tier">view repo</a></p>
+  <p class="eyebrow">Project 01 — AWS, self-directed · <a href="https://github.com/ArchitectKeita/aws-ha-web-tier">view repo</a></p>
   <h2>A web tier that heals itself</h2>
 
   <div class="diagram">
     <svg viewBox="0 0 560 236" role="img" aria-label="Architecture: internet traffic reaches an Application Load Balancer, which distributes to an Auto Scaling Group of EC2 instances across two Availability Zones; instances read from a private S3 bucket using an IAM role.">
       <defs>
         <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M0 0 L8 4 L0 8 z" fill="currentColor"/>
+          <path d="M0 0 L8 4 L0 8 z" fill="#707b8f"/>
         </marker>
       </defs>
-      <g font-family="JetBrains Mono, monospace" font-size="10" fill="currentColor" color="var(--muted)">
+      <g font-family="JetBrains Mono, monospace" font-size="10">
 
-        <!-- AZ containers -->
-        <rect x="186" y="14" width="150" height="94" rx="2" fill="none" stroke="var(--line)" stroke-dasharray="3 3"/>
-        <text x="194" y="28" fill="var(--muted)">us-east-1a</text>
-        <rect x="186" y="128" width="150" height="94" rx="2" fill="none" stroke="var(--line)" stroke-dasharray="3 3"/>
-        <text x="194" y="142" fill="var(--muted)">us-east-1b</text>
+        <rect x="186" y="14" width="150" height="94" rx="3" fill="none" stroke="#28313f" stroke-dasharray="3 4"/>
+        <text x="194" y="28" fill="#707b8f">us-east-1a</text>
+        <rect x="186" y="128" width="150" height="94" rx="3" fill="none" stroke="#28313f" stroke-dasharray="3 4"/>
+        <text x="194" y="142" fill="#707b8f">us-east-1b</text>
 
-        <!-- internet -->
-        <text x="8" y="114" fill="var(--muted)">internet</text>
+        <text x="8" y="114" fill="#707b8f">internet</text>
 
-        <!-- ALB -->
-        <rect x="74" y="92" width="76" height="52" rx="2" fill="var(--bg)" stroke="var(--accent)"/>
-        <text x="112" y="114" text-anchor="middle" fill="var(--accent)">ALB</text>
-        <text x="112" y="128" text-anchor="middle" fill="var(--muted)" font-size="9">:80</text>
+        <rect x="74" y="92" width="76" height="52" rx="3" fill="#11161f" stroke="#36e0d0"/>
+        <text x="112" y="114" text-anchor="middle" fill="#36e0d0">ALB</text>
+        <text x="112" y="128" text-anchor="middle" fill="#707b8f" font-size="9">:80</text>
 
-        <!-- EC2 a -->
-        <rect x="206" y="42" width="110" height="46" rx="2" fill="var(--bg)" stroke="var(--line)"/>
-        <text x="261" y="62" text-anchor="middle" fill="var(--fg)">EC2</text>
-        <text x="261" y="76" text-anchor="middle" fill="var(--muted)" font-size="9">apache</text>
+        <rect x="206" y="42" width="110" height="46" rx="3" fill="#11161f" stroke="#28313f"/>
+        <text x="261" y="62" text-anchor="middle" fill="#eceff4">EC2</text>
+        <text x="261" y="76" text-anchor="middle" fill="#707b8f" font-size="9">apache</text>
 
-        <!-- EC2 b -->
-        <rect x="206" y="156" width="110" height="46" rx="2" fill="var(--bg)" stroke="var(--line)"/>
-        <text x="261" y="176" text-anchor="middle" fill="var(--fg)">EC2</text>
-        <text x="261" y="190" text-anchor="middle" fill="var(--muted)" font-size="9">apache</text>
+        <rect x="206" y="156" width="110" height="46" rx="3" fill="#11161f" stroke="#28313f"/>
+        <text x="261" y="176" text-anchor="middle" fill="#eceff4">EC2</text>
+        <text x="261" y="190" text-anchor="middle" fill="#707b8f" font-size="9">apache</text>
 
-        <!-- ASG bracket -->
-        <path d="M344 46 h10 v150 h-10" fill="none" stroke="var(--line)"/>
-        <text x="360" y="118" fill="var(--muted)">ASG</text>
-        <text x="360" y="131" fill="var(--muted)" font-size="9">min 2</text>
+        <path d="M344 46 h10 v150 h-10" fill="none" stroke="#28313f"/>
+        <text x="360" y="118" fill="#707b8f">ASG</text>
+        <text x="360" y="131" fill="#707b8f" font-size="9">min 2</text>
 
-        <!-- S3 -->
-        <rect x="438" y="92" width="110" height="52" rx="2" fill="var(--bg)" stroke="var(--line)"/>
-        <text x="493" y="112" text-anchor="middle" fill="var(--fg)">S3</text>
-        <text x="493" y="126" text-anchor="middle" fill="var(--muted)" font-size="9">private</text>
+        <rect x="438" y="92" width="110" height="52" rx="3" fill="#11161f" stroke="#28313f"/>
+        <text x="493" y="112" text-anchor="middle" fill="#eceff4">S3</text>
+        <text x="493" y="126" text-anchor="middle" fill="#707b8f" font-size="9">private</text>
 
-        <!-- arrows -->
-        <g stroke="var(--muted)" fill="none" marker-end="url(#ar)">
+        <g stroke="#707b8f" fill="none" marker-end="url(#ar)">
           <path d="M52 110 H68"/>
           <path d="M152 110 C174 110 172 65 200 65"/>
           <path d="M152 112 C174 112 172 179 200 179"/>
           <path d="M376 118 H432"/>
         </g>
-        <text x="404" y="110" text-anchor="middle" fill="var(--accent)" font-size="9">IAM role</text>
+        <text x="404" y="110" text-anchor="middle" fill="#36e0d0" font-size="9">IAM role</text>
       </g>
     </svg>
   </div>
