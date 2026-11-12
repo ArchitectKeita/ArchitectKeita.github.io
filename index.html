@@ -17,6 +17,7 @@
   --red:#ff4655;
   --violet:#a78bfa;
   --amber:#f7b955;
+  --green:#3ee07f;
 
   --c:var(--teal);           /* per-section accent, overridden below */
   color-scheme:dark;
@@ -122,7 +123,7 @@ h1{
 
 /* ============ PROJECT INDEX ============ */
 .index{display:grid; gap:14px; padding-block:8px 64px}
-@media (min-width:760px){.index{grid-template-columns:1fr 1fr 1fr}}
+@media (min-width:760px){.index{grid-template-columns:1fr 1fr}}
 .card{
   --c:var(--teal);
   position:relative; display:block; min-width:0;
@@ -137,13 +138,14 @@ a.card:hover{transform:translateY(-4px); border-color:var(--c); box-shadow:0 18p
 .card p{margin:0 0 16px; font-size:14px; color:var(--muted)}
 .card .go{font-family:var(--mono); font-size:12px; color:var(--c)}
 .card.red{--c:var(--red)}
+.card.green{--c:var(--green)}
 .card.next{--c:var(--amber); border-style:dashed; background:var(--surface)}
 .chips{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px}
 .chips span{font-family:var(--mono); font-size:10.5px; padding:.22rem .55rem; border-radius:999px; border:1px solid color-mix(in srgb,var(--c) 35%,transparent); color:color-mix(in srgb,var(--c) 75%,#fff); background:color-mix(in srgb,var(--c) 7%,transparent)}
 
 /* ============ SECTIONS ============ */
 section{position:relative; padding-block:72px; border-top:1px solid var(--line)}
-section.teal{--c:var(--teal)} section.red{--c:var(--red)} section.violet{--c:var(--violet)} section.amber{--c:var(--amber)}
+section.teal{--c:var(--teal)} section.red{--c:var(--red)} section.green{--c:var(--green)} section.violet{--c:var(--violet)} section.amber{--c:var(--amber)}
 section::before{
   content:""; position:absolute; top:-1px; left:0; width:120px; height:2px;
   background:linear-gradient(90deg,var(--c),transparent);
@@ -210,6 +212,31 @@ h2{font-family:var(--display); font-weight:800; font-size:clamp(28px,5.4vw,44px)
 .decoy-head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 16px; margin-bottom:12px; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted)}
 .decoy-head b{color:var(--red); font-weight:500}
 
+/* project 03: the alert, as the cardholder sees it */
+.alert-demo{display:grid; gap:18px; margin-bottom:40px; align-items:center}
+@media (min-width:760px){.alert-demo{grid-template-columns:minmax(0,340px) 1fr}}
+.phone{
+  min-width:0; border-radius:20px; padding:24px 22px; background:#0b1510;
+  border:1px solid #1e3a2a; position:relative; overflow:hidden;
+  box-shadow:0 30px 70px -30px rgba(62,224,127,.35);
+}
+.phone::before{content:""; position:absolute; inset:0 0 auto; height:5px; background:var(--red)}
+.phone .tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:#ff8a93; display:flex; gap:.5rem; align-items:center}
+.phone .tag::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--red); animation:pulse-r 2s ease-out infinite}
+@keyframes pulse-r{0%{box-shadow:0 0 0 0 rgba(255,70,85,.7)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.phone h4{font-family:var(--display); font-size:26px; font-weight:800; letter-spacing:-.02em; margin:14px 0 6px}
+.phone .amt{margin:0; color:var(--soft); font-size:15.5px}
+.phone .why{margin:6px 0 18px; font-family:var(--mono); font-size:12px; color:#ff8a93}
+.phone .btns{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.phone .btns span{display:block; text-align:center; font-weight:700; font-size:14px; padding:12px 8px; border-radius:10px}
+.phone .yes{background:var(--green); color:#06200f}
+.phone .no{background:var(--red); color:#fff}
+.rules{display:grid; gap:10px; min-width:0}
+.rules > div{display:grid; grid-template-columns:auto 1fr; gap:4px 14px; padding:13px 16px; border-radius:10px; border:1px solid var(--line); background:var(--surface); min-width:0}
+.rules b{font-family:var(--mono); font-size:12px; font-weight:500; color:var(--green); grid-row:1 / span 2; padding-top:2px; min-width:92px}
+.rules span{font-size:14px; color:var(--fg)}
+.rules small{grid-column:2; font-size:12.5px; color:var(--muted)}
+
 /* stack */
 .stack{display:grid; gap:14px}
 @media (min-width:680px){.stack{grid-template-columns:repeat(2,1fr)}}
@@ -264,7 +291,7 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
 .kanji{font-size:16px; background:linear-gradient(90deg,var(--teal),var(--violet),var(--red),var(--amber)); -webkit-background-clip:text; background-clip:text; color:transparent}
 
 @media (prefers-reduced-motion:reduce){
-  .dot,.flow,.aurora span,h1,.decoy .row.gone .res{animation:none}
+  .dot,.flow,.aurora span,h1,.decoy .row.gone .res,.phone .tag::before{animation:none}
   a.card:hover{transform:none}
   html{scroll-behavior:auto}
 }
@@ -279,7 +306,7 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
   <span class="pill"><span class="dot"></span>open to cloud roles · DMV</span>
   <h1>Ibrahim Keita</h1>
   <p class="role"><b class="t">cloud operations</b> &nbsp;/&nbsp; <b class="v">infrastructure support</b> &nbsp;/&nbsp; <b class="r">us-east-1</b></p>
-  <p class="lede">Enterprise IT background — Active Directory, Microsoft 365, endpoint deployment, escalated troubleshooting. Now <strong>building AWS infrastructure, breaking it on purpose, and writing down exactly what failed.</strong> Two projects live, one running every night.</p>
+  <p class="lede">Enterprise IT background — Active Directory, Microsoft 365, endpoint deployment, escalated troubleshooting. Now <strong>building AWS infrastructure, breaking it on purpose, and writing down exactly what failed.</strong> Three projects live, one running every night.</p>
   <p class="contact">
     <a href="mailto:ibrahimkeita70@gmail.com">ibrahimkeita70@gmail.com</a>
     <a href="https://github.com/ArchitectKeita">GitHub</a>
@@ -288,9 +315,9 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
   </p>
 
   <div class="stats">
-    <div class="stat"><div class="n">2</div><div class="l">AWS projects shipped</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">AWS projects shipped</div></div>
     <div class="stat"><div class="n">03:00</div><div class="l">nightly job, still running</div></div>
-    <div class="stat"><div class="n">9</div><div class="l">failures documented</div></div>
+    <div class="stat"><div class="n">12</div><div class="l">failures documented</div></div>
     <div class="stat"><div class="n">$0</div><div class="l">monthly running cost</div></div>
   </div>
 </header>
@@ -307,6 +334,12 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
     <span class="k">Project 02</span>
     <h3>Backups that can only delete their own</h3>
     <div class="chips"><span>Lambda</span><span>EventBridge</span><span>EBS</span><span>IAM</span></div>
+    <span class="go">read it ↓</span>
+  </a>
+  <a class="card green" href="#fraud">
+    <span class="k">Project 03</span>
+    <h3>The "Was this you?" fraud alert</h3>
+    <div class="chips"><span>Lambda</span><span>DynamoDB Streams</span><span>SNS</span><span>API Gateway</span></div>
     <span class="go">read it ↓</span>
   </a>
   <div class="card next">
@@ -457,6 +490,95 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
   </div>
 </section>
 
+<!-- ================= PROJECT 03 ================= -->
+<section class="green" id="fraud">
+  <p class="eyebrow"><span class="num">03</span> AWS · serverless · self-directed · <a href="https://github.com/ArchitectKeita/aws-fraud-alerts">view repo →</a></p>
+  <h2>The "Was this you?" fraud alert</h2>
+  <p class="sub">The text your bank sends when something strange hits your card — built end to end. A swipe is approved, scored against the cardholder's history off a DynamoDB stream, and if it looks wrong, an email goes out with one link. Tap <em>lock</em> and the very next swipe is declined.</p>
+
+  <div class="alert-demo">
+    <div class="phone" role="img" aria-label="Example alert: Was this you? $1,399.99 at ElectroMax Online, flagged as an amount spike, with Yes and Lock buttons">
+      <span class="tag">Unusual charge · card 1002</span>
+      <h4>Was this you?</h4>
+      <p class="amt">$1,399.99 at ElectroMax Online</p>
+      <p class="why">Amount spike · typical $42.23</p>
+      <div class="btns"><span class="yes">Yes, it was me</span><span class="no">Lock my card</span></div>
+    </div>
+    <div class="rules">
+      <div><b>travel</b><span>Swipes in two states within 2 hours</span><small>Fired: MD → AZ in 20 min</small></div>
+      <div><b>spike</b><span>5× the card's normal spend</span><small>Fired: $1,399.99 vs typical $42.23</small></div>
+      <div><b>velocity</b><span>5+ charges inside 2 minutes</span><small>Fired once — 6 charges, 1 email</small></div>
+      <div><b>odd hours</b><span>Gift cards or electronics at 1–4 AM</span><small>Fired: $250 in gift cards at 3 AM</small></div>
+    </div>
+  </div>
+
+  <div class="diagram">
+    <svg viewBox="0 0 560 250" role="img" aria-label="Swipe goes to fraud-authorize, which records it in the transactions table. The table's stream triggers fraud-detector, which emails through SNS. The cardholder's tap goes through API Gateway to fraud-card-action, which locks the card.">
+      <defs>
+        <marker id="ar3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#3ee07f"/></marker>
+        <marker id="ar3r" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#ff4655"/></marker>
+      </defs>
+      <g font-family="JetBrains Mono, monospace" font-size="10">
+        <rect x="10" y="20" width="120" height="50" rx="6" fill="#0d1d14" stroke="#3ee07f"/>
+        <text x="70" y="41" text-anchor="middle" fill="#eef0f5" font-weight="700">authorize</text>
+        <text x="70" y="56" text-anchor="middle" fill="#727c90" font-size="9">approve · record</text>
+
+        <rect x="215" y="20" width="130" height="50" rx="6" fill="#11151e" stroke="#2c5a40"/>
+        <text x="280" y="41" text-anchor="middle" fill="#eef0f5">transactions</text>
+        <text x="280" y="56" text-anchor="middle" fill="#727c90" font-size="9">DynamoDB · stream</text>
+
+        <rect x="215" y="100" width="130" height="50" rx="6" fill="#0d1d14" stroke="#3ee07f"/>
+        <text x="280" y="121" text-anchor="middle" fill="#eef0f5" font-weight="700">detector</text>
+        <text x="280" y="136" text-anchor="middle" fill="#727c90" font-size="9">4 rules</text>
+
+        <rect x="430" y="100" width="120" height="50" rx="6" fill="#11151e" stroke="#2c5a40"/>
+        <text x="490" y="121" text-anchor="middle" fill="#eef0f5">SNS</text>
+        <text x="490" y="136" text-anchor="middle" fill="#727c90" font-size="9">email</text>
+
+        <rect x="430" y="185" width="120" height="50" rx="6" fill="#1d0c10" stroke="#ff4655"/>
+        <text x="490" y="206" text-anchor="middle" fill="#ffc9cd">cardholder</text>
+        <text x="490" y="221" text-anchor="middle" fill="#ff8a93" font-size="9">"Was this you?"</text>
+
+        <rect x="215" y="185" width="130" height="50" rx="6" fill="#11151e" stroke="#2c5a40"/>
+        <text x="280" y="206" text-anchor="middle" fill="#eef0f5">API Gateway</text>
+        <text x="280" y="221" text-anchor="middle" fill="#727c90" font-size="9">GET shows · POST acts</text>
+
+        <rect x="10" y="185" width="120" height="50" rx="6" fill="#0d1d14" stroke="#3ee07f"/>
+        <text x="70" y="206" text-anchor="middle" fill="#eef0f5" font-weight="700">card-action</text>
+        <text x="70" y="221" text-anchor="middle" fill="#ff8a93" font-size="9">LOCK</text>
+
+        <g stroke="#3ee07f" fill="none" marker-end="url(#ar3)" stroke-width="1.4">
+          <path class="flow" d="M130 45 H209"/>
+          <path class="flow" d="M280 70 V94"/>
+          <path class="flow" d="M345 125 H424"/>
+        </g>
+        <g stroke="#ff4655" fill="none" marker-end="url(#ar3r)" stroke-width="1.4">
+          <path class="flow" d="M490 150 V179"/>
+          <path class="flow" d="M430 210 H351"/>
+          <path class="flow" d="M215 210 H136"/>
+          <path class="flow" d="M70 185 V76"/>
+        </g>
+        <text x="78" y="135" fill="#ff8a93" font-size="9">declined</text>
+        <text x="78" y="147" fill="#ff8a93" font-size="9">from here on</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="built">
+    <div><h3>Approve fast, score right after</h3><p>The card reader never waits on fraud scoring. It approves and records; the detector scores a moment later off the stream — the way card networks keep checkout fast.</p></div>
+    <div><h3>Scanner-proof links</h3><p>Email security scanners open links on their own. So opening the link only <em>shows</em> the buttons — the lock happens on an explicit button press (<code>POST</code>), never on a visit.</p></div>
+    <div><h3>No double anything</h3><p>Swipes are idempotent on their transaction ID, alerts resolve with a conditional update — click twice and the second click gets "Already handled."</p></div>
+    <div><h3>Fraud never becomes normal</h3><p>Flagged charges aren't folded into the card's average, so one big fraud can't raise the baseline and hide the next. One open alert per card — six charges, one email.</p></div>
+  </div>
+
+  <p class="label">What broke</p>
+  <div class="broke">
+    <div><span class="t">a stream that wouldn't move on</span><p>The detector's code was wrong in the console, and a stream-triggered Lambda retries the same batch until it succeeds. Nothing was lost — 60 swipes queued — and caught up unevenly once fixed, because each stream shard backs off separately.</p></div>
+    <div><span class="t">fraud detected, nobody told</span><p>A missing setting made my code skip the email <em>silently</em>: fraud caught, alert written, no one notified. Fixed in the code — missing config now logs <code>CONFIG ERROR</code>, and every alert says whether its email was sent.</p></div>
+    <div><span class="t">no terminal, so the simulator became a Lambda</span><p>CloudShell is locked on new accounts. The traffic generator moved into a fourth Lambda, driven from the console — the whole system runs inside AWS.</p></div>
+  </div>
+</section>
+
 <!-- ================= STACK ================= -->
 <section class="violet">
   <p class="eyebrow">Stack</p>
@@ -468,7 +590,7 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
     </div>
     <div>
       <dt>AWS · serverless &amp; security</dt>
-      <dd><span>Lambda</span><span>EventBridge Scheduler</span><span>CloudWatch Logs</span><span>IAM roles &amp; policies</span><span>IAM conditions</span><span>Instance profiles</span><span>IMDSv2</span></dd>
+      <dd><span>Lambda</span><span>DynamoDB &amp; Streams</span><span>SNS</span><span>API Gateway</span><span>EventBridge Scheduler</span><span>CloudWatch Logs</span><span>IAM roles &amp; policies</span><span>IAM conditions</span><span>Instance profiles</span><span>IMDSv2</span></dd>
     </div>
     <div>
       <dt>Systems &amp; identity</dt>
