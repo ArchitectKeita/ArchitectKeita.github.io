@@ -139,6 +139,7 @@ a.card:hover{transform:translateY(-4px); border-color:var(--c); box-shadow:0 18p
 .card .go{font-family:var(--mono); font-size:12px; color:var(--c)}
 .card.red{--c:var(--red)}
 .card.green{--c:var(--green)}
+.card.violet{--c:var(--violet)}
 .card.next{--c:var(--amber); border-style:dashed; background:var(--surface)}
 .chips{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px}
 .chips span{font-family:var(--mono); font-size:10.5px; padding:.22rem .55rem; border-radius:999px; border:1px solid color-mix(in srgb,var(--c) 35%,transparent); color:color-mix(in srgb,var(--c) 75%,#fff); background:color-mix(in srgb,var(--c) 7%,transparent)}
@@ -306,7 +307,7 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
   <span class="pill"><span class="dot"></span>open to cloud roles · DMV</span>
   <h1>Ibrahim Keita</h1>
   <p class="role"><b class="t">cloud operations</b> &nbsp;/&nbsp; <b class="v">infrastructure support</b> &nbsp;/&nbsp; <b class="r">us-east-1</b></p>
-  <p class="lede">Enterprise IT background — Active Directory, Microsoft 365, endpoint deployment, escalated troubleshooting. Now <strong>building AWS infrastructure, breaking it on purpose, and writing down exactly what failed.</strong> Three projects live, one running every night.</p>
+  <p class="lede">Enterprise IT background — Active Directory, Microsoft 365, endpoint deployment, escalated troubleshooting. Now <strong>building AWS infrastructure, breaking it on purpose, and writing down exactly what failed.</strong> Four projects live — the newest built entirely in Terraform.</p>
   <p class="contact">
     <a href="mailto:ibrahimkeita70@gmail.com">ibrahimkeita70@gmail.com</a>
     <a href="https://github.com/ArchitectKeita">GitHub</a>
@@ -315,9 +316,9 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
   </p>
 
   <div class="stats">
-    <div class="stat"><div class="n">3</div><div class="l">AWS projects shipped</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">AWS projects shipped</div></div>
     <div class="stat"><div class="n">03:00</div><div class="l">nightly job, still running</div></div>
-    <div class="stat"><div class="n">12</div><div class="l">failures documented</div></div>
+    <div class="stat"><div class="n">16</div><div class="l">failures documented</div></div>
     <div class="stat"><div class="n">$0</div><div class="l">monthly running cost</div></div>
   </div>
 </header>
@@ -342,12 +343,12 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
     <div class="chips"><span>Lambda</span><span>DynamoDB Streams</span><span>SNS</span><span>API Gateway</span></div>
     <span class="go">read it ↓</span>
   </a>
-  <div class="card next">
-    <span class="k">Up next</span>
-    <h3>Project 01, rebuilt in Terraform</h3>
-    <p>The web tier was built by clicking — which is how a missing shebang survived three rebuilds. Next it gets defined in code.</p>
-    <span class="go">in progress</span>
-  </div>
+  <a class="card violet" href="#tracker">
+    <span class="k">Project 04</span>
+    <h3>A job tracker that logs itself</h3>
+    <div class="chips"><span>Terraform</span><span>Lambda</span><span>Bedrock</span><span>Gmail</span></div>
+    <span class="go">read it ↓</span>
+  </a>
 </nav>
 
 <!-- ================= PROJECT 01 ================= -->
@@ -579,6 +580,27 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
   </div>
 </section>
 
+<!-- ================= PROJECT 04 ================= -->
+<section class="violet" id="tracker">
+  <p class="eyebrow"><span class="num">04</span> Terraform · serverless · in daily use · <a href="https://github.com/ArchitectKeita/aws-job-tracker">view repo →</a></p>
+  <h2>A job tracker that logs itself</h2>
+  <p class="sub">I built this to run my own job search. When an application confirmation lands in Gmail, it's logged within the hour; a rejection or a "let's schedule a call" moves the status on its own. Every morning it nudges me about anything gone quiet, and every Sunday it emails the week's numbers. The first of my projects built <em>entirely as code</em> — 32 resources, one <code>terraform apply</code>.</p>
+
+  <div class="built">
+    <div><h3>One command, 32 resources</h3><p>Three Lambdas with their own roles, a table, an API with six routes, two schedules, a topic, and the key that protects it — built by <code>terraform apply</code> and removed by <code>terraform destroy</code>.</p></div>
+    <div><h3>Changes touch only what changed</h3><p>Fixing a bug in the web page produced a one-line plan: <code>0 to add, 1 to change</code>. Terraform hashed the code, updated one function, and left the other 31 alone. Six seconds to ship.</p></div>
+    <div><h3>AI with a backup</h3><p>Amazon Nova reads each email. If the model fails for any reason, pattern-matching takes over — so an email is never dropped because a model call did.</p></div>
+    <div><h3>No duplicates, no nagging</h3><p>Each email maps to one ID, so it can't be logged twice; a confirmation for a job already tracked links to it instead. Each follow-up reminder fires at most once a week.</p></div>
+  </div>
+
+  <p class="label">What broke</p>
+  <div class="broke">
+    <div><span class="t">the AI had no allowance on a new account</span><p><code>ThrottlingException: Too many tokens per day</code> — after four short emails. New AWS accounts start with almost no Bedrock quota. The fallback carried every email correctly, and the fix made it fail fast (~2 s per email instead of ~10).</p></div>
+    <div><span class="t">an empty key from the wrong folder</span><p>Every sync got <code>401</code>. The key had been read with <code>terraform output</code> from <code>system32</code>, where there's no state, so it was blank. Terraform state is per-directory.</p></div>
+    <div><span class="t">"updated −1 days ago"</span><p>The laptop clock was a few seconds behind AWS, so a brand-new entry looked like it came from the future. Clamped at zero — and the fix became the proof that the update path works.</p></div>
+  </div>
+</section>
+
 <!-- ================= STACK ================= -->
 <section class="violet">
   <p class="eyebrow">Stack</p>
@@ -590,7 +612,7 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
     </div>
     <div>
       <dt>AWS · serverless &amp; security</dt>
-      <dd><span>Lambda</span><span>DynamoDB &amp; Streams</span><span>SNS</span><span>API Gateway</span><span>EventBridge Scheduler</span><span>CloudWatch Logs</span><span>IAM roles &amp; policies</span><span>IAM conditions</span><span>Instance profiles</span><span>IMDSv2</span></dd>
+      <dd><span>Lambda</span><span>Bedrock (Nova)</span><span>DynamoDB &amp; Streams</span><span>SNS</span><span>API Gateway</span><span>EventBridge Scheduler</span><span>CloudWatch Logs</span><span>IAM roles &amp; policies</span><span>IAM conditions</span><span>Instance profiles</span><span>IMDSv2</span></dd>
     </div>
     <div>
       <dt>Systems &amp; identity</dt>
@@ -598,7 +620,7 @@ footer .note{font-family:var(--mono); font-size:11.5px; color:var(--muted); lett
     </div>
     <div>
       <dt>Code &amp; operations</dt>
-      <dd><span>Python · boto3</span><span>Bash</span><span>cloud-init / user data</span><span>Linux (AL2023)</span><span>Apache</span><span>ServiceNow</span><span>Imaging &amp; deployment</span></dd>
+      <dd><span>Terraform</span><span>Python · boto3</span><span>Bash</span><span>cloud-init / user data</span><span>Linux (AL2023)</span><span>Apache</span><span>ServiceNow</span><span>Imaging &amp; deployment</span></dd>
     </div>
   </dl>
 </section>
