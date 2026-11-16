@@ -1,6 +1,6 @@
 <title>Keita — Cloud Operations</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
 /* A command deck: one dark world, six signal colors. Each project owns one. */
 :root{
@@ -322,6 +322,141 @@ h2::after{width:110px; height:1px; margin-top:18px; background:linear-gradient(9
 .timeline::before{background:linear-gradient(var(--amber),var(--red),var(--violet),var(--blue),var(--teal)); box-shadow:none; opacity:.6}
 .kanji{color:var(--silver); text-shadow:none}
 footer .note{font-family:var(--caps); letter-spacing:.2em}
+
+/* ═════════════ TERMINAL: black glass, amber type, function keys ═════════════ */
+:root{
+  --bg:#000; --deck:#050505; --surface:#0a0a0a; --surface-2:#111;
+  --line:#262626; --line-bright:#3a3a3a;
+  --fg:#f2f2f2; --soft:#c8c8c8; --muted:#8a8a8a;
+  --amb:#ffa31a; --amb2:#ffcc4d; --key:#f5c400; --hdr:#1d3f73;
+  --teal:#3fd0ff; --red:#ff4545; --green:#1fdc6c; --violet:#b48cff; --blue:#4d8dff; --amber:#ffa31a; --silver:#d0d0d0;
+  --c:var(--amb);
+  --display:"IBM Plex Mono","JetBrains Mono",ui-monospace,monospace;
+  --caps:"IBM Plex Mono","JetBrains Mono",ui-monospace,monospace;
+  --body:"IBM Plex Sans","Inter",system-ui,sans-serif;
+  --mono:"IBM Plex Mono","JetBrains Mono",ui-monospace,monospace;
+  --cut:0px;
+}
+::selection{background:var(--amb); color:#000}
+body{background:#000; font:15px/1.6 var(--body)}
+.space,#stars{display:none!important}
+section,.card,.stat,.shot,.diagram,.built>div,.broke>div,.stack>div,.cred,.job{clip-path:none!important; border-radius:0!important}
+.card::before,.card::after,.diagram::before,.diagram::after,.shot::before,.shot::after,.cred::before,.cred::after,.stack>div::before,.stack>div::after{display:none}
+
+/* top bar = function-key strip */
+.hud{background:#000; border-bottom:1px solid var(--line-bright); backdrop-filter:none}
+.hud::after{display:none}
+.hud-in{height:44px; gap:14px; max-width:none; padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.brand{gap:6px; font:600 14px var(--mono); letter-spacing:.04em}
+.tkey{background:var(--amb); color:#000; padding:2px 8px}
+.tgo{color:var(--key)}
+.hud nav{gap:4px}
+.hud nav a{font:600 11px var(--mono); letter-spacing:.02em; padding:4px 8px; background:#1a1a1a; color:var(--key); border:0; text-transform:uppercase}
+.hud nav a:hover{background:var(--key); color:#000}
+.hud nav a.on{background:var(--amb); color:#000; box-shadow:none}
+.tele{font:12px var(--mono)}
+.tele b{color:var(--green)} .tele .dot{background:var(--green); box-shadow:0 0 6px var(--green)}
+
+/* ticker */
+.ticker{position:relative; z-index:5; overflow:hidden; border-bottom:1px solid var(--line); background:#060606; height:28px}
+.tk-in{display:flex; gap:34px; width:max-content; height:28px; align-items:center; font:500 12px var(--mono); white-space:nowrap; animation:tick 60s linear infinite}
+.tk-in b{color:var(--amb); font-weight:600}
+.tk-in i{font-style:normal} .tk-in i.up{color:var(--green)} .tk-in i.flat{color:var(--teal)}
+@keyframes tick{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tk-in{animation:none}}
+
+/* hero */
+.boot{font:500 12px var(--mono); letter-spacing:.04em; color:var(--muted); text-transform:uppercase}
+.boot span+span::before{content:"|"; margin:0 10px; color:var(--line-bright)}
+.boot.cmd{color:var(--amb); font-size:13px; margin-bottom:6px; text-transform:none}
+.boot.cmd .pr{color:var(--key); margin-right:4px}
+.boot.cmd b{color:var(--key); font-weight:600}
+.boot.cmd span+span::before,.boot.cmd .cur::before{content:none}
+.boot .cur{background:var(--amb); width:9px; height:15px}
+h1{font:600 clamp(44px,8vw,96px)/.95 var(--mono); letter-spacing:-.03em; color:var(--amb); background:none; -webkit-background-clip:border-box; background-clip:border-box;
+  -webkit-text-fill-color:var(--amb); filter:none; text-shadow:0 0 28px rgba(255,163,26,.18); text-transform:uppercase}
+.role{font:500 13px var(--mono); letter-spacing:.06em}
+.role .t,.role .v,.role .r{color:var(--fg)}
+.lede{font:400 18px/1.65 var(--body); color:var(--soft)}
+.lede strong{color:var(--fg); font-style:normal; font-weight:600}
+.contact a{font:600 12px var(--mono); letter-spacing:.04em; text-transform:uppercase; border:1px solid var(--line-bright); background:#0d0d0d; color:var(--fg)}
+.contact a:hover{background:var(--amb); color:#000; border-color:var(--amb)}
+.contact a.main{background:var(--amb); color:#000; border-color:var(--amb)}
+.contact a.main:hover{background:var(--key); border-color:var(--key)}
+
+/* the systems map, as a radar scope */
+.scope{border:1px solid var(--line-bright); background:radial-gradient(circle at center,rgba(255,163,26,.05),transparent 65%),#030303}
+.ringspin circle{stroke:var(--amb)}
+.ringspin circle[stroke="#5b96ff"]{stroke:var(--green)}
+.scope svg g[fill="none"][stroke]{stroke:rgba(255,163,26,.18)}
+.scope svg g[stroke-width="1.5"][opacity]{stroke:var(--line-bright)}
+.scope-read{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; font-family:var(--mono); line-height:1}
+.scope-read b{font-size:64px; font-weight:600; color:var(--amb)}
+.scope-read span{font-size:11px; color:var(--muted); letter-spacing:.2em; text-transform:uppercase; margin-top:6px}
+.scope-read em{font-style:normal; font-size:11px; color:#000; background:var(--green); padding:2px 6px; margin-top:8px; letter-spacing:.08em}
+.node i{box-shadow:none; border-radius:0; width:9px; height:9px}
+.node span{font:600 10.5px var(--mono); letter-spacing:.04em; background:#000; border:1px solid var(--line-bright); color:var(--fg)}
+
+/* stats: quote board */
+.stats{gap:0; border:1px solid var(--line-bright)}
+.stat{background:#050505; border:0; border-right:1px solid var(--line); border-left:0!important}
+.stat:last-child{border-right:0}
+.stat .n{font:600 clamp(28px,4vw,40px)/1 var(--mono); color:var(--fg)!important; text-shadow:none; background:none}
+.stat:nth-child(1) .n{color:var(--green)!important}
+.stat .l{font:500 11px var(--mono); letter-spacing:.06em; color:var(--amb); text-transform:uppercase}
+
+/* project index: a security list */
+.index{gap:0; border:1px solid var(--line-bright)}
+.card{background:#050505!important; border:0; border-bottom:1px solid var(--line); border-right:1px solid var(--line)}
+a.card:hover{background:#111!important}
+.card .k{font:600 11px var(--mono); letter-spacing:.04em; color:var(--amb); text-transform:uppercase}
+.card .k em{color:#000; background:var(--green); font-style:normal; padding:1px 6px}
+.card h3{font:600 17px/1.35 var(--mono); color:var(--fg); letter-spacing:-.01em}
+.card .chips span{font:500 10.5px var(--mono); border-radius:0; background:#141414; border-color:var(--line); color:var(--soft)}
+.card .go{font:600 11px var(--mono); color:var(--key); letter-spacing:.04em}
+
+/* sections: panels with a title bar */
+section{border:1px solid var(--line-bright); background:#030303; padding-top:0!important}
+section::before{position:static; display:block; height:auto; margin:0 calc(-1*var(--pad,clamp(18px,3vw,36px))) 24px; padding:0;
+  content:""; height:4px; background:var(--c); opacity:1}
+section::after{content:none}
+.eyebrow{font:600 12px var(--mono); letter-spacing:.04em; text-transform:uppercase; color:var(--fg); background:var(--hdr); margin-left:calc(-1*clamp(18px,3vw,36px)); margin-right:calc(-1*clamp(18px,3vw,36px)); padding:8px clamp(18px,3vw,36px); margin-top:-24px}
+.eyebrow .num{background:var(--amb); color:#000; border:0; font-family:var(--mono); clip-path:none; min-width:0; padding:0 8px; height:20px}
+.eyebrow a{color:var(--key)}
+h2{font:600 clamp(26px,4.2vw,40px)/1.1 var(--mono); letter-spacing:-.02em; color:var(--amb); margin-top:22px}
+h2::after{width:64px; height:2px; background:var(--amb); box-shadow:none}
+.sub{font:400 17px/1.65 var(--body); color:var(--soft)}
+.sub em{color:var(--fg); font-style:normal; border-bottom:1px solid var(--amb)}
+.built>div{background:#070707; border:1px solid var(--line)}
+.built h3{font:600 15px var(--mono); color:var(--fg)}
+.built h3::before{content:"▸ "; color:var(--amb)}
+.built p,.broke p{font-family:var(--body)}
+.label{font:600 12px var(--mono); color:var(--amb); letter-spacing:.04em}
+.label::before{content:"» "}
+.broke>div{background:#070707; border:1px solid var(--line); border-left:3px solid var(--red)}
+.broke>div::before{font:700 10px var(--mono); color:var(--red)}
+.broke .t{font:600 14px var(--mono); color:var(--fg)}
+.shot{border:1px solid var(--line-bright); box-shadow:none}
+.shot figcaption{font-family:var(--mono); font-size:12px}
+.shot figcaption b{color:var(--amb)}
+.diagram{background:#050505; border:1px solid var(--line)}
+code{color:var(--amb2)}
+.stack dt{font:600 12px var(--mono); color:var(--amb); text-transform:uppercase}
+.stack dd span{font:500 12px var(--mono); border-radius:0; background:#111; border-color:var(--line)}
+.timeline::before{background:var(--line-bright); opacity:1}
+.job::before{border-color:var(--amb); background:#000; border-radius:0}
+.job h3,.cred h3{font:600 17px var(--mono); color:var(--fg)}
+.job .org{color:var(--amb)}
+.job .when{font-family:var(--mono); color:var(--muted)}
+footer{border-top:1px solid var(--line-bright)}
+footer .note{font:500 11px var(--mono); letter-spacing:.04em; color:var(--muted)}
+
+section{padding-left:clamp(18px,3vw,36px)!important; padding-right:clamp(18px,3vw,36px)!important; padding-bottom:clamp(24px,3vw,36px)!important; margin-top:28px}
+section::before{margin:0 calc(-1*clamp(18px,3vw,36px)) 0!important}
+.eyebrow{margin-top:0!important}
+.contact a{clip-path:none!important}
+.stats{padding:0!important; background:none}
+.stats::before,.stats::after{display:none!important}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="wing" viewBox="0 0 200 200"><path d="M100 78 L112 58 L116 80 L192 70 L172 100 L152 94 L138 118 L122 108 L100 142 L78 108 L62 118 L48 94 L28 100 L8 70 L84 80 L88 58 Z" fill="#c9ced8"/><text x="100" y="114" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="30" fill="#050405">K</text><path d="M94 142 L97 154 L100 142 Z" fill="#b3263a"/><path d="M106 142 L103 154 L100 142 Z" fill="#b3263a"/></symbol></svg>
@@ -330,7 +465,7 @@ footer .note{font-family:var(--caps); letter-spacing:.2em}
 
 <div class="hud">
   <div class="hud-in">
-    <a class="brand" href="#top"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#wing"/></svg>KEITA</a>
+    <a class="brand" href="#top"><span class="tkey">KEITA</span><span class="tgo">&lt;GO&gt;</span></a>
     <nav aria-label="Sections">
       <a href="#web-tier">01 Web</a><a href="#snapshots">02 Backups</a><a href="#fraud">03 Fraud</a><a href="#tracker">04 Tracker</a><a href="#bank">05 Bank</a><a href="#console">06 Console</a><a href="#orbit">07 Orbit</a><a href="#rolodex">08 Rolodex</a><a href="#watchtower">09 Watch</a><a href="#stack">Stack</a><a href="#log">Log</a><a href="#creds">Certs</a>
     </nav>
@@ -338,12 +473,15 @@ footer .note{font-family:var(--caps); letter-spacing:.2em}
   </div>
 </div>
 
+<div class="ticker" aria-hidden="true"><div class="tk-in"><span><b>WEB</b> 01 <i class="up">▲ HEALTHY</i></span><span><b>BACKUP</b> 02 <i class="up">▲ 03:00 OK</i></span><span><b>FRAUD</b> 03 <i class="up">▲ 4 RULES</i></span><span><b>TRACKER</b> 04 <i class="up">▲ DAILY</i></span><span><b>BANK</b> 05 <i class="up">▲ 45 TESTS</i></span><span><b>CONSOLE</b> 06 <i class="up">▲ SWEEP 15M</i></span><span><b>ORBIT</b> 07 <i class="up">▲ ~9K SATS</i></span><span><b>ROLODEX</b> 08 <i class="up">▲ 2 AZ</i></span><span><b>WATCH</b> 09 <i class="up">▲ 60S</i></span><span><b>COST</b> $0 <i class="flat">■ IDLE</i></span><span><b>FAILS</b> 21 <i class="flat">■ LOGGED</i></span><span><b>WEB</b> 01 <i class="up">▲ HEALTHY</i></span><span><b>BACKUP</b> 02 <i class="up">▲ 03:00 OK</i></span><span><b>FRAUD</b> 03 <i class="up">▲ 4 RULES</i></span><span><b>TRACKER</b> 04 <i class="up">▲ DAILY</i></span><span><b>BANK</b> 05 <i class="up">▲ 45 TESTS</i></span><span><b>CONSOLE</b> 06 <i class="up">▲ SWEEP 15M</i></span><span><b>ORBIT</b> 07 <i class="up">▲ ~9K SATS</i></span><span><b>ROLODEX</b> 08 <i class="up">▲ 2 AZ</i></span><span><b>WATCH</b> 09 <i class="up">▲ 60S</i></span><span><b>COST</b> $0 <i class="flat">■ IDLE</i></span><span><b>FAILS</b> 21 <i class="flat">■ LOGGED</i></span></div></div>
+
 <div class="wrap">
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
   <div>
-    <p class="boot"><span>House of Keita</span><span>nine deployments standing</span><span>open to cloud roles · DMV</span></p>
+    <p class="boot cmd"><span class="pr">&gt;</span> KEITA CLOUD PORTFOLIO <b>&lt;GO&gt;</b><span class="cur"></span></p>
+    <p class="boot"><span>9 deployments live</span><span>open to cloud roles · DMV</span><span>us-east-1</span></p>
     <h1>Ibrahim<br>Keita</h1>
     <p class="role"><b class="t">cloud operations</b> &nbsp;/&nbsp; <b class="v">infrastructure support</b> &nbsp;/&nbsp; <b class="r">us-east-1</b></p>
     <p class="lede">Enterprise IT background — Active Directory, Microsoft 365, endpoint deployment, escalated troubleshooting. Now <strong>building AWS infrastructure, breaking it on purpose, and writing down exactly what failed.</strong> Nine projects shipped — including a working bank with a ledger that balances to the cent, a command center that watches all of them, a live 3D tracker of everything in orbit, and an app running on containers in a private network with no route to the internet.</p>
@@ -369,7 +507,7 @@ footer .note{font-family:var(--caps); letter-spacing:.2em}
       </g>
       <g stroke="#8a8277" stroke-width="1.5" fill="none" opacity=".9"><path d="M6 30V6H30M370 6H394V30M394 370V394H370M30 394H6V370"/></g>
     </svg>
-    <svg class="crest" viewBox="0 0 200 200" aria-hidden="true"><use href="#wing"/></svg>
+    <div class="scope-read"><b>9</b><span>systems</span><em>ALL LIVE</em></div>
     <div class="core"><b>IX</b> &nbsp;standing</div>
     <a class="node"   href="#web-tier"  style="--c:var(--teal);--x:66%;--y:17%;--d:0s"><i></i><span>01 WEB TIER</span></a>
     <a class="node"   href="#snapshots" style="--c:var(--red);--x:78%;--y:56%;--d:.4s"><i></i><span>02 BACKUPS</span></a>
@@ -901,7 +1039,7 @@ footer .note{font-family:var(--caps); letter-spacing:.2em}
 
 
 <footer>
-  <span class="note"><span class="kanji">建</span> &nbsp;built to be rebuilt</span>
+  <span class="note">KEITA &lt;GO&gt; · built to be rebuilt</span>
   <span class="note">ibrahimkeita70@gmail.com</span>
 </footer>
 
