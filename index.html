@@ -363,6 +363,18 @@ h2::after{background:var(--fg)!important; opacity:.4}
 .kanji{color:var(--muted)!important; text-shadow:none!important}
 .boot .cur{background:var(--fg)}
 .card::before,.card::after,.diagram::before,.diagram::after,.shot::before,.shot::after,.cred::before,.cred::after,.stack>div::before,.stack>div::after{background:var(--line-bright)!important; box-shadow:none!important}
+
+/* ── one accent: blood crimson, used only to frame and flag ── */
+:root{--blood:#c0283e; --blood-dim:rgba(192,40,62,.55)}
+.card{border:1px solid var(--blood-dim)!important}
+a.card:hover{border-color:var(--blood)!important; box-shadow:inset 0 0 0 1px var(--blood),0 0 28px -6px rgba(192,40,62,.45)!important}
+.card::before,.card::after{background:var(--blood)!important; opacity:1}
+.card .k em{color:var(--blood)!important}
+.card .go{transition:color .2s} a.card:hover .go{color:var(--blood)!important}
+.eyebrow .num{border-color:var(--blood)!important; color:var(--blood)!important}
+h2::after{background:var(--blood)!important; opacity:.9}
+.hud nav a.on{box-shadow:inset 0 -1px 0 var(--blood)}
+.tele .dot{background:var(--blood)}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="wing" viewBox="0 0 200 200"><path d="M100 78 L112 58 L116 80 L192 70 L172 100 L152 94 L138 118 L122 108 L100 142 L78 108 L62 118 L48 94 L28 100 L8 70 L84 80 L88 58 Z" fill="#ece7dd"/><text x="100" y="114" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="30" fill="#050405">K</text><path d="M94 142 L97 154 L100 142 Z" fill="#7c776e"/><path d="M106 142 L103 154 L100 142 Z" fill="#7c776e"/></symbol></svg>
