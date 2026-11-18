@@ -1,6 +1,6 @@
 <title>Keita — Cloud Operations</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
 /* A command deck: one dark world, six signal colors. Each project owns one. */
 :root{
@@ -375,15 +375,83 @@ a.card:hover{border-color:var(--blood)!important; box-shadow:inset 0 0 0 1px var
 h2::after{background:var(--blood)!important; opacity:.9}
 .hud nav a.on{box-shadow:inset 0 -1px 0 var(--blood)}
 .tele .dot{background:var(--blood)}
+
+/* ================= MONOLITH =================
+   Black and silver. One emblem: a tree. Menus that invert when chosen,
+   thin rules, square markers, quiet machinery. */
+:root{
+  --bg:#06070a; --deck:#0a0b0e; --surface:rgba(15,17,21,.88); --surface-2:#14171c;
+  --line:rgba(206,211,218,.11); --line-bright:rgba(206,211,218,.26);
+  --fg:#eceef1; --soft:#b9bdc4; --muted:#7a7f88; --ink:#eceef1;
+  --silver:#c8ccd2; --blood:#c8ccd2; --blood-dim:rgba(200,204,210,.26);
+  --caps:"Zen Kaku Gothic New","Inter",system-ui,sans-serif;
+  --metal:linear-gradient(180deg,#ffffff 0%,#dfe2e6 38%,#a9aeb5 62%,#e9ebee 100%);
+}
+body{background:var(--bg)}
+.space{background:
+    radial-gradient(60vw 45vh at 78% -8%, rgba(220,226,234,.07), transparent 70%),
+    radial-gradient(50vw 40vh at 0% 30%, rgba(160,168,180,.05), transparent 70%)!important}
+.space::before{display:block!important; content:""; position:absolute; inset:0;
+  background-image:radial-gradient(rgba(206,211,218,.09) 1px, transparent 1.2px); background-size:22px 22px;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 75%); mask-image:linear-gradient(180deg,#000 0%,transparent 75%)}
+.space::after{display:block!important; content:""; position:absolute; inset:0;
+  background:repeating-linear-gradient(180deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px)}
+#stars{opacity:.16}
+::selection{background:var(--fg); color:#06070a}
+
+/* type: wide-tracked sans for the machinery, serif for the names */
+.boot,.role,.hud nav a,.node span,.stat .l,.card .k,.eyebrow,.label,.chips span,.go,.tele{font-family:var(--caps)!important}
+.boot{letter-spacing:.38em!important; color:var(--muted)}
+h1{background:var(--metal)!important; -webkit-background-clip:text!important; background-clip:text!important;
+  -webkit-text-fill-color:transparent!important; color:transparent!important; letter-spacing:.02em}
+
+/* menus invert when chosen */
+.hud{background:rgba(6,7,10,.92)!important; border-bottom:1px solid var(--line)}
+.hud nav a{transition:background .15s,color .15s}
+.hud nav a:hover,.hud nav a.on{background:var(--fg)!important; color:#06070a!important; box-shadow:none!important}
+.brand svg{filter:none}
+.contact a{border-radius:0!important}
+.contact a:hover,.contact a.main{background:var(--fg)!important; color:#06070a!important; border-color:var(--fg)!important}
+.contact a.main:hover{background:var(--silver)!important; border-color:var(--silver)!important}
+
+/* the emblem */
+.scope svg.crest{width:46%!important; transform:translate(-50%,-52%)!important; filter:drop-shadow(0 0 22px rgba(220,226,234,.16))!important; animation:breathe 7s ease-in-out infinite!important}
+.ringspin circle,.scope svg g[stroke]{stroke:rgba(206,211,218,.24)!important}
+.node i{background:var(--fg)!important; border-radius:0!important; transform:rotate(45deg)}
+.node span{background:rgba(6,7,10,.92)!important; border-color:var(--line-bright)!important}
+.node:hover span{background:var(--fg)!important; color:#06070a!important}
+
+/* cards: silver hairlines, a menu bar that fills on hover */
+.card{border:1px solid var(--line-bright)!important; position:relative}
+.card::before,.card::after{background:var(--silver)!important}
+.card .k em{color:var(--soft)!important}
+.card .k em::before{content:"■ "; font-size:.8em}
+a.card{transition:background .2s, box-shadow .2s}
+a.card:hover{border-color:var(--fg)!important; box-shadow:inset 3px 0 0 var(--fg)!important; background:linear-gradient(90deg,rgba(236,238,241,.07),transparent 60%),var(--surface-2)!important}
+a.card:hover .go{color:var(--fg)!important}
+.card .chips span{border-color:var(--line)!important; color:var(--muted)!important; border-radius:0}
+
+/* sections */
+.eyebrow .num{border-color:var(--fg)!important; color:#06070a!important; background:var(--fg)!important}
+h2::after{background:var(--metal)!important; opacity:.8!important}
+.stat{border:1px solid var(--line)!important; border-top:2px solid var(--silver)!important}
+.stat .n{background:var(--metal); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent!important}
+.tele .dot{background:var(--fg)!important; border-radius:0; animation:blink 2s steps(1) infinite!important}
+.shot{border:1px solid var(--line-bright)!important}
+.broke>div{border-left:2px solid var(--line-bright)!important}
+.timeline::before{background:linear-gradient(var(--silver),transparent)!important}
+.job::before{border-radius:0!important; transform:rotate(45deg); border-color:var(--silver)!important}
+.kanji{color:var(--soft)!important}
+.role>*{white-space:nowrap}
 </style>
 
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="wing" viewBox="0 0 200 200"><path d="M100 78 L112 58 L116 80 L192 70 L172 100 L152 94 L138 118 L122 108 L100 142 L78 108 L62 118 L48 94 L28 100 L8 70 L84 80 L88 58 Z" fill="#ece7dd"/><text x="100" y="114" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="30" fill="#050405">K</text><path d="M94 142 L97 154 L100 142 Z" fill="#7c776e"/><path d="M106 142 L103 154 L100 142 Z" fill="#7c776e"/></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tree" viewBox="0 0 200 200"><g stroke="#d6d9dd" stroke-linecap="round" fill="none"><line x1="100" y1="152" x2="100" y2="118" stroke-width="5.5"/><line x1="100.0" y1="118.0" x2="100.0" y2="88.0" stroke-width="4.2"/><line x1="100.0" y1="88.0" x2="109.7" y2="68.0" stroke-width="2.8"/><line x1="109.7" y1="68.0" x2="122.3" y2="57.5" stroke-width="1.8"/><line x1="122.3" y1="57.5" x2="133.9" y2="53.7" stroke-width="1.2"/><line x1="133.9" y1="53.7" x2="142.8" y2="54.0" stroke-width="1.1"/><line x1="133.9" y1="53.7" x2="140.9" y2="48.1" stroke-width="1.1"/><line x1="122.3" y1="57.5" x2="128.0" y2="46.7" stroke-width="1.2"/><line x1="128.0" y1="46.7" x2="134.7" y2="40.7" stroke-width="1.1"/><line x1="128.0" y1="46.7" x2="129.2" y2="37.8" stroke-width="1.1"/><line x1="109.7" y1="68.0" x2="110.3" y2="51.6" stroke-width="1.8"/><line x1="110.3" y1="51.6" x2="115.3" y2="40.5" stroke-width="1.2"/><line x1="115.3" y1="40.5" x2="121.6" y2="34.1" stroke-width="1.1"/><line x1="115.3" y1="40.5" x2="115.9" y2="31.6" stroke-width="1.1"/><line x1="110.3" y1="51.6" x2="106.2" y2="40.2" stroke-width="1.2"/><line x1="106.2" y1="40.2" x2="106.2" y2="31.2" stroke-width="1.1"/><line x1="106.2" y1="40.2" x2="100.4" y2="33.3" stroke-width="1.1"/><line x1="100.0" y1="88.0" x2="90.3" y2="68.0" stroke-width="2.8"/><line x1="90.3" y1="68.0" x2="89.7" y2="51.6" stroke-width="1.8"/><line x1="89.7" y1="51.6" x2="93.8" y2="40.2" stroke-width="1.2"/><line x1="93.8" y1="40.2" x2="99.6" y2="33.3" stroke-width="1.1"/><line x1="93.8" y1="40.2" x2="93.8" y2="31.2" stroke-width="1.1"/><line x1="89.7" y1="51.6" x2="84.7" y2="40.5" stroke-width="1.2"/><line x1="84.7" y1="40.5" x2="84.1" y2="31.6" stroke-width="1.1"/><line x1="84.7" y1="40.5" x2="78.4" y2="34.1" stroke-width="1.1"/><line x1="90.3" y1="68.0" x2="77.7" y2="57.5" stroke-width="1.8"/><line x1="77.7" y1="57.5" x2="72.0" y2="46.7" stroke-width="1.2"/><line x1="72.0" y1="46.7" x2="70.8" y2="37.8" stroke-width="1.1"/><line x1="72.0" y1="46.7" x2="65.3" y2="40.7" stroke-width="1.1"/><line x1="77.7" y1="57.5" x2="66.1" y2="53.7" stroke-width="1.2"/><line x1="66.1" y1="53.7" x2="59.1" y2="48.1" stroke-width="1.1"/><line x1="66.1" y1="53.7" x2="57.2" y2="54.0" stroke-width="1.1"/><line x1="100.0" y1="118.0" x2="82.0" y2="96.6" stroke-width="4.2"/><line x1="82.0" y1="96.6" x2="77.0" y2="76.4" stroke-width="2.8"/><line x1="77.0" y1="76.4" x2="79.6" y2="61.3" stroke-width="1.8"/><line x1="79.6" y1="61.3" x2="85.6" y2="51.7" stroke-width="1.2"/><line x1="85.6" y1="51.7" x2="92.3" y2="46.6" stroke-width="1.1"/><line x1="85.6" y1="51.7" x2="87.3" y2="43.5" stroke-width="1.1"/><line x1="79.6" y1="61.3" x2="77.3" y2="50.2" stroke-width="1.2"/><line x1="77.3" y1="50.2" x2="78.4" y2="41.9" stroke-width="1.1"/><line x1="77.3" y1="50.2" x2="72.8" y2="43.2" stroke-width="1.1"/><line x1="77.0" y1="76.4" x2="67.6" y2="64.4" stroke-width="1.8"/><line x1="67.6" y1="64.4" x2="64.5" y2="53.4" stroke-width="1.2"/><line x1="64.5" y1="53.4" x2="65.1" y2="45.1" stroke-width="1.1"/><line x1="64.5" y1="53.4" x2="59.5" y2="46.7" stroke-width="1.1"/><line x1="67.6" y1="64.4" x2="57.7" y2="58.7" stroke-width="1.2"/><line x1="57.7" y1="58.7" x2="52.4" y2="52.2" stroke-width="1.1"/><line x1="57.7" y1="58.7" x2="49.5" y2="57.2" stroke-width="1.1"/><line x1="82.0" y1="96.6" x2="63.1" y2="88.1" stroke-width="2.8"/><line x1="63.1" y1="88.1" x2="52.8" y2="76.7" stroke-width="1.8"/><line x1="52.8" y1="76.7" x2="48.9" y2="66.1" stroke-width="1.2"/><line x1="48.9" y1="66.1" x2="48.9" y2="57.7" stroke-width="1.1"/><line x1="48.9" y1="66.1" x2="43.5" y2="59.7" stroke-width="1.1"/><line x1="52.8" y1="76.7" x2="42.6" y2="71.8" stroke-width="1.2"/><line x1="42.6" y1="71.8" x2="36.8" y2="65.7" stroke-width="1.1"/><line x1="42.6" y1="71.8" x2="34.2" y2="71.0" stroke-width="1.1"/><line x1="63.1" y1="88.1" x2="47.7" y2="88.1" stroke-width="1.8"/><line x1="47.7" y1="88.1" x2="37.2" y2="83.8" stroke-width="1.2"/><line x1="37.2" y1="83.8" x2="31.0" y2="78.2" stroke-width="1.1"/><line x1="37.2" y1="83.8" x2="28.8" y2="83.6" stroke-width="1.1"/><line x1="47.7" y1="88.1" x2="37.2" y2="92.3" stroke-width="1.2"/><line x1="37.2" y1="92.3" x2="28.8" y2="92.6" stroke-width="1.1"/><line x1="37.2" y1="92.3" x2="31.0" y2="98.0" stroke-width="1.1"/><line x1="100.0" y1="118.0" x2="118.0" y2="96.6" stroke-width="4.2"/><line x1="118.0" y1="96.6" x2="136.9" y2="88.1" stroke-width="2.8"/><line x1="136.9" y1="88.1" x2="152.3" y2="88.1" stroke-width="1.8"/><line x1="152.3" y1="88.1" x2="162.8" y2="92.3" stroke-width="1.2"/><line x1="162.8" y1="92.3" x2="169.0" y2="98.0" stroke-width="1.1"/><line x1="162.8" y1="92.3" x2="171.2" y2="92.6" stroke-width="1.1"/><line x1="152.3" y1="88.1" x2="162.8" y2="83.8" stroke-width="1.2"/><line x1="162.8" y1="83.8" x2="171.2" y2="83.6" stroke-width="1.1"/><line x1="162.8" y1="83.8" x2="169.0" y2="78.2" stroke-width="1.1"/><line x1="136.9" y1="88.1" x2="147.2" y2="76.7" stroke-width="1.8"/><line x1="147.2" y1="76.7" x2="157.4" y2="71.8" stroke-width="1.2"/><line x1="157.4" y1="71.8" x2="165.8" y2="71.0" stroke-width="1.1"/><line x1="157.4" y1="71.8" x2="163.2" y2="65.7" stroke-width="1.1"/><line x1="147.2" y1="76.7" x2="151.1" y2="66.1" stroke-width="1.2"/><line x1="151.1" y1="66.1" x2="156.5" y2="59.7" stroke-width="1.1"/><line x1="151.1" y1="66.1" x2="151.1" y2="57.7" stroke-width="1.1"/><line x1="118.0" y1="96.6" x2="123.0" y2="76.4" stroke-width="2.8"/><line x1="123.0" y1="76.4" x2="132.4" y2="64.4" stroke-width="1.8"/><line x1="132.4" y1="64.4" x2="142.3" y2="58.7" stroke-width="1.2"/><line x1="142.3" y1="58.7" x2="150.5" y2="57.2" stroke-width="1.1"/><line x1="142.3" y1="58.7" x2="147.6" y2="52.2" stroke-width="1.1"/><line x1="132.4" y1="64.4" x2="135.5" y2="53.4" stroke-width="1.2"/><line x1="135.5" y1="53.4" x2="140.5" y2="46.7" stroke-width="1.1"/><line x1="135.5" y1="53.4" x2="134.9" y2="45.1" stroke-width="1.1"/><line x1="123.0" y1="76.4" x2="120.4" y2="61.3" stroke-width="1.8"/><line x1="120.4" y1="61.3" x2="122.7" y2="50.2" stroke-width="1.2"/><line x1="122.7" y1="50.2" x2="127.2" y2="43.2" stroke-width="1.1"/><line x1="122.7" y1="50.2" x2="121.6" y2="41.9" stroke-width="1.1"/><line x1="120.4" y1="61.3" x2="114.4" y2="51.7" stroke-width="1.2"/><line x1="114.4" y1="51.7" x2="112.7" y2="43.5" stroke-width="1.1"/><line x1="114.4" y1="51.7" x2="107.7" y2="46.6" stroke-width="1.1"/><line x1="100.0" y1="152.0" x2="111.5" y2="161.6" stroke-width="3.0"/><line x1="111.5" y1="161.6" x2="115.5" y2="170.7" stroke-width="2.0"/><line x1="115.5" y1="170.7" x2="115.3" y2="177.2" stroke-width="1.3"/><line x1="115.5" y1="170.7" x2="120.5" y2="174.9" stroke-width="1.3"/><line x1="111.5" y1="161.6" x2="121.1" y2="164.0" stroke-width="2.0"/><line x1="121.1" y1="164.0" x2="126.1" y2="168.2" stroke-width="1.3"/><line x1="121.1" y1="164.0" x2="127.5" y2="162.7" stroke-width="1.3"/><line x1="100.0" y1="152.0" x2="100.0" y2="167.0" stroke-width="3.0"/><line x1="100.0" y1="167.0" x2="95.7" y2="175.9" stroke-width="2.0"/><line x1="95.7" y1="175.9" x2="90.5" y2="179.9" stroke-width="1.3"/><line x1="95.7" y1="175.9" x2="95.7" y2="182.4" stroke-width="1.3"/><line x1="100.0" y1="167.0" x2="104.3" y2="175.9" stroke-width="2.0"/><line x1="104.3" y1="175.9" x2="104.3" y2="182.4" stroke-width="1.3"/><line x1="104.3" y1="175.9" x2="109.5" y2="179.9" stroke-width="1.3"/><line x1="100.0" y1="152.0" x2="88.5" y2="161.6" stroke-width="3.0"/><line x1="88.5" y1="161.6" x2="78.9" y2="164.0" stroke-width="2.0"/><line x1="78.9" y1="164.0" x2="72.5" y2="162.7" stroke-width="1.3"/><line x1="78.9" y1="164.0" x2="73.9" y2="168.2" stroke-width="1.3"/><line x1="88.5" y1="161.6" x2="84.5" y2="170.7" stroke-width="2.0"/><line x1="84.5" y1="170.7" x2="79.5" y2="174.9" stroke-width="1.3"/><line x1="84.5" y1="170.7" x2="84.7" y2="177.2" stroke-width="1.3"/></g><g fill="#f2f3f5"><rect x="140.9" y="52.1" width="3.8" height="3.8" transform="rotate(45 142.8 54.0)"/><rect x="139.0" y="46.2" width="3.8" height="3.8" transform="rotate(45 140.9 48.1)"/><rect x="132.8" y="38.8" width="3.8" height="3.8" transform="rotate(45 134.7 40.7)"/><rect x="127.3" y="35.9" width="3.8" height="3.8" transform="rotate(45 129.2 37.8)"/><rect x="119.7" y="32.2" width="3.8" height="3.8" transform="rotate(45 121.6 34.1)"/><rect x="114.0" y="29.7" width="3.8" height="3.8" transform="rotate(45 115.9 31.6)"/><rect x="104.3" y="29.3" width="3.8" height="3.8" transform="rotate(45 106.2 31.2)"/><rect x="98.5" y="31.4" width="3.8" height="3.8" transform="rotate(45 100.4 33.3)"/><rect x="97.7" y="31.4" width="3.8" height="3.8" transform="rotate(45 99.6 33.3)"/><rect x="91.9" y="29.3" width="3.8" height="3.8" transform="rotate(45 93.8 31.2)"/><rect x="82.2" y="29.7" width="3.8" height="3.8" transform="rotate(45 84.1 31.6)"/><rect x="76.5" y="32.2" width="3.8" height="3.8" transform="rotate(45 78.4 34.1)"/><rect x="68.9" y="35.9" width="3.8" height="3.8" transform="rotate(45 70.8 37.8)"/><rect x="63.4" y="38.8" width="3.8" height="3.8" transform="rotate(45 65.3 40.7)"/><rect x="57.2" y="46.2" width="3.8" height="3.8" transform="rotate(45 59.1 48.1)"/><rect x="55.3" y="52.1" width="3.8" height="3.8" transform="rotate(45 57.2 54.0)"/><rect x="90.4" y="44.7" width="3.8" height="3.8" transform="rotate(45 92.3 46.6)"/><rect x="85.4" y="41.6" width="3.8" height="3.8" transform="rotate(45 87.3 43.5)"/><rect x="76.5" y="40.0" width="3.8" height="3.8" transform="rotate(45 78.4 41.9)"/><rect x="70.9" y="41.3" width="3.8" height="3.8" transform="rotate(45 72.8 43.2)"/><rect x="63.2" y="43.2" width="3.8" height="3.8" transform="rotate(45 65.1 45.1)"/><rect x="57.6" y="44.8" width="3.8" height="3.8" transform="rotate(45 59.5 46.7)"/><rect x="50.5" y="50.3" width="3.8" height="3.8" transform="rotate(45 52.4 52.2)"/><rect x="47.6" y="55.3" width="3.8" height="3.8" transform="rotate(45 49.5 57.2)"/><rect x="47.0" y="55.8" width="3.8" height="3.8" transform="rotate(45 48.9 57.7)"/><rect x="41.6" y="57.8" width="3.8" height="3.8" transform="rotate(45 43.5 59.7)"/><rect x="34.9" y="63.8" width="3.8" height="3.8" transform="rotate(45 36.8 65.7)"/><rect x="32.3" y="69.1" width="3.8" height="3.8" transform="rotate(45 34.2 71.0)"/><rect x="29.1" y="76.3" width="3.8" height="3.8" transform="rotate(45 31.0 78.2)"/><rect x="26.9" y="81.7" width="3.8" height="3.8" transform="rotate(45 28.8 83.6)"/><rect x="26.9" y="90.7" width="3.8" height="3.8" transform="rotate(45 28.8 92.6)"/><rect x="29.1" y="96.1" width="3.8" height="3.8" transform="rotate(45 31.0 98.0)"/><rect x="167.1" y="96.1" width="3.8" height="3.8" transform="rotate(45 169.0 98.0)"/><rect x="169.3" y="90.7" width="3.8" height="3.8" transform="rotate(45 171.2 92.6)"/><rect x="169.3" y="81.7" width="3.8" height="3.8" transform="rotate(45 171.2 83.6)"/><rect x="167.1" y="76.3" width="3.8" height="3.8" transform="rotate(45 169.0 78.2)"/><rect x="163.9" y="69.1" width="3.8" height="3.8" transform="rotate(45 165.8 71.0)"/><rect x="161.3" y="63.8" width="3.8" height="3.8" transform="rotate(45 163.2 65.7)"/><rect x="154.6" y="57.8" width="3.8" height="3.8" transform="rotate(45 156.5 59.7)"/><rect x="149.2" y="55.8" width="3.8" height="3.8" transform="rotate(45 151.1 57.7)"/><rect x="148.6" y="55.3" width="3.8" height="3.8" transform="rotate(45 150.5 57.2)"/><rect x="145.7" y="50.3" width="3.8" height="3.8" transform="rotate(45 147.6 52.2)"/><rect x="138.6" y="44.8" width="3.8" height="3.8" transform="rotate(45 140.5 46.7)"/><rect x="133.0" y="43.2" width="3.8" height="3.8" transform="rotate(45 134.9 45.1)"/><rect x="125.3" y="41.3" width="3.8" height="3.8" transform="rotate(45 127.2 43.2)"/><rect x="119.7" y="40.0" width="3.8" height="3.8" transform="rotate(45 121.6 41.9)"/><rect x="110.8" y="41.6" width="3.8" height="3.8" transform="rotate(45 112.7 43.5)"/><rect x="105.8" y="44.7" width="3.8" height="3.8" transform="rotate(45 107.7 46.6)"/></g><path d="M66 152h68" stroke="#9a9ea3" stroke-width="1"/></symbol></svg>
 <canvas id="stars" aria-hidden="true"></canvas>
 <div class="space" aria-hidden="true"></div>
 
 <div class="hud">
   <div class="hud-in">
-    <a class="brand" href="#top"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#wing"/></svg>KEITA</a>
+    <a class="brand" href="#top"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#tree"/></svg>KEITA</a>
     <nav aria-label="Sections">
       <a href="#web-tier">01 Web</a><a href="#snapshots">02 Backups</a><a href="#fraud">03 Fraud</a><a href="#tracker">04 Tracker</a><a href="#bank">05 Bank</a><a href="#console">06 Console</a><a href="#orbit">07 Orbit</a><a href="#rolodex">08 Rolodex</a><a href="#watchtower">09 Watch</a><a href="#pipeline">10 Pipeline</a><a href="#stack">Stack</a><a href="#log">Log</a><a href="#creds">Certs</a>
     </nav>
@@ -423,7 +491,7 @@ h2::after{background:var(--blood)!important; opacity:.9}
       </g>
       <g stroke="#8a8277" stroke-width="1.5" fill="none" opacity=".9"><path d="M6 30V6H30M370 6H394V30M394 370V394H370M30 394H6V370"/></g>
     </svg>
-    <svg class="crest" viewBox="0 0 200 200" aria-hidden="true"><use href="#wing"/></svg>
+    <svg class="crest" viewBox="0 0 200 200" aria-hidden="true"><use href="#tree"/></svg>
     <div class="core"><b>X</b> &nbsp;standing</div>
     <a class="node"   href="#web-tier"  style="--c:var(--teal);--x:66%;--y:17%;--d:0s"><i></i><span>01 WEB TIER</span></a>
     <a class="node"   href="#snapshots" style="--c:var(--red);--x:78%;--y:56%;--d:.4s"><i></i><span>02 BACKUPS</span></a>
