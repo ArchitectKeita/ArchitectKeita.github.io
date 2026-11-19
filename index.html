@@ -473,7 +473,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
       <a href="https://xwk64zsl8c.execute-api.us-east-1.amazonaws.com/">Live console ↗</a>
       <a href="https://l9qbgchdaj.execute-api.us-east-1.amazonaws.com/">Live orbit ↗</a>
       <a href="https://r3w0cezdah.execute-api.us-east-2.amazonaws.com/">Live pipeline ↗</a>
-      <a href="https://github.com/ArchitectKeita">GitHub</a>
+      <a href="https://github.com/SaintKeita">GitHub</a>
       <a href="https://www.linkedin.com/in/ibrahim-keita-981065216/">LinkedIn</a>
       <a href="mailto:ibrahimkeita70@gmail.com">ibrahimkeita70@gmail.com</a>
     </p>
@@ -579,7 +579,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 
 <!-- ================= PROJECT 01 ================= -->
 <section class="teal" id="web-tier">
-  <p class="eyebrow"><span class="num">01</span> AWS · self-directed · <a href="https://github.com/ArchitectKeita/aws-ha-web-tier">view repo →</a></p>
+  <p class="eyebrow"><span class="num">01</span> AWS · self-directed · <a href="https://github.com/SaintKeita/aws-ha-web-tier">view repo →</a></p>
   <h2>A web tier that heals itself</h2>
   <p class="sub">Two Availability Zones behind a load balancer, an Auto Scaling Group that replaces failed instances, and content pulled from a private S3 bucket with no credentials on disk. Then I terminated instances to see what held.</p>
 
@@ -644,7 +644,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 
 <!-- ================= PROJECT 02 ================= -->
 <section class="red" id="snapshots">
-  <p class="eyebrow"><span class="num">02</span> AWS · self-directed · running nightly · <a href="https://github.com/ArchitectKeita/aws-snapshot-cleanup">view repo →</a></p>
+  <p class="eyebrow"><span class="num">02</span> AWS · self-directed · running nightly · <a href="https://github.com/SaintKeita/aws-snapshot-cleanup">view repo →</a></p>
   <h2>Backups that can only delete their own</h2>
   <p class="sub">A Lambda on a 3 AM schedule snapshots every EBS volume tagged <code>Backup=true</code> and deletes its own snapshots after 7 days. The rule that matters — <em>never delete what you didn't create</em> — is enforced twice: once in the code, once in IAM.</p>
 
@@ -719,7 +719,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 
 <!-- ================= PROJECT 03 ================= -->
 <section class="green" id="fraud">
-  <p class="eyebrow"><span class="num">03</span> AWS · serverless · self-directed · <a href="https://github.com/ArchitectKeita/aws-fraud-alerts">view repo →</a></p>
+  <p class="eyebrow"><span class="num">03</span> AWS · serverless · self-directed · <a href="https://github.com/SaintKeita/aws-fraud-alerts">view repo →</a></p>
   <h2>The "Was this you?" fraud alert</h2>
   <p class="sub">The text your bank sends when something strange hits your card — built end to end. A swipe is approved, scored against the cardholder's history off a DynamoDB stream, and if it looks wrong, an email goes out with one link. Tap <em>lock</em> and the very next swipe is declined.</p>
 
@@ -808,7 +808,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 
 <!-- ================= PROJECT 04 ================= -->
 <section class="violet" id="tracker">
-  <p class="eyebrow"><span class="num">04</span> Terraform · serverless · in daily use · <a href="https://github.com/ArchitectKeita/aws-job-tracker">view repo →</a></p>
+  <p class="eyebrow"><span class="num">04</span> Terraform · serverless · in daily use · <a href="https://github.com/SaintKeita/aws-job-tracker">view repo →</a></p>
   <h2>A job tracker that logs itself</h2>
   <p class="sub">I built this to run my own job search. When an application confirmation lands in Gmail, it's logged within the hour; a rejection or a "let's schedule a call" moves the status on its own. Every morning it nudges me about anything gone quiet, and every Sunday it emails the week's numbers. The first of my projects built <em>entirely as code</em> — 32 resources, one <code>terraform apply</code>.</p>
 
@@ -831,7 +831,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 </section>
 
 <section class="blue" id="bank">
-  <p class="eyebrow"><span class="num">05</span> Fintech · Terraform · 45 tests · <a href="https://github.com/ArchitectKeita/aws-keitabank">view repo →</a></p>
+  <p class="eyebrow"><span class="num">05</span> Fintech · Terraform · 45 tests · <a href="https://github.com/SaintKeita/aws-keitabank">view repo →</a></p>
   <h2>KeitaBank: a bank that balances to the cent</h2>
   <p class="sub">A to-do list that saves twice shows a duplicate. A bank that saves twice takes someone's rent. KeitaBank is a small working bank — real sign-in, accounts with account numbers, transfers between people, card-style payments, and a live money tracker — built to get that part right. The money is fake. The guarantees are the ones a real bank needs.</p>
 
@@ -856,7 +856,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 </section>
 
 <section class="silver" id="console" style="--c:var(--silver)">
-  <p class="eyebrow"><span class="num">06</span> Observability · Terraform · <a href="https://xwk64zsl8c.execute-api.us-east-1.amazonaws.com/">open the live console ↗</a> · <a href="https://github.com/ArchitectKeita/aws-command-center">view repo →</a></p>
+  <p class="eyebrow"><span class="num">06</span> Observability · Terraform · <a href="https://xwk64zsl8c.execute-api.us-east-1.amazonaws.com/">open the live console ↗</a> · <a href="https://github.com/SaintKeita/aws-command-center">view repo →</a></p>
   <h2>A command center that watches the other five</h2>
   <p class="sub">Five projects in, I had five things running in one AWS account and no single place to see whether they were alive. Every 15 minutes a collector sweeps the account — every function's traffic, errors and speed, every alarm, the public pages' health, whether the nightly jobs actually ran — and a live console shows it, graded <em>nominal</em>, <em>degraded</em>, <em>down</em> or <em>offline</em> with the reason in plain words.</p>
 
@@ -880,7 +880,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 
 <!-- ================= PROJECT 07 ================= -->
 <section class="amber" id="orbit">
-  <p class="eyebrow"><span class="num">07</span> Space &amp; markets · Terraform · 18 tests · <a href="https://l9qbgchdaj.execute-api.us-east-1.amazonaws.com/">open the live globe ↗</a> · <a href="https://github.com/ArchitectKeita/aws-orbit">view repo →</a></p>
+  <p class="eyebrow"><span class="num">07</span> Space &amp; markets · Terraform · 18 tests · <a href="https://l9qbgchdaj.execute-api.us-east-1.amazonaws.com/">open the live globe ↗</a> · <a href="https://github.com/SaintKeita/aws-orbit">view repo →</a></p>
   <h2>Orbit: what's above us right now</h2>
   <p class="sub">A live 3D globe of about nine thousand satellites — the space stations, GPS, weather satellites, the ones bright enough to see at night, and thousands of Starlinks. Click any dot and it tells you what it is, how high and how fast it's flying, and <em>when it next passes over Washington, DC</em>. Beside it, a market panel tracks the eight companies that build and launch them.</p>
 
@@ -907,7 +907,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 
 <!-- ================= PROJECT 08 ================= -->
 <section id="rolodex" style="--c:#e8a0a8">
-  <p class="eyebrow"><span class="num">08</span> Containers · Terraform · 15 tests · <a href="https://github.com/ArchitectKeita/aws-rolodex">view repo →</a></p>
+  <p class="eyebrow"><span class="num">08</span> Containers · Terraform · 15 tests · <a href="https://github.com/SaintKeita/aws-rolodex">view repo →</a></p>
   <h2>Rolodex: containers that show their own insides</h2>
   <p class="sub">A contacts app for someone whose job is knowing everybody — who's going cold, who should meet whom — running the way most companies run software: <em>in containers, behind a load balancer, in a private network, across two data centers.</em> A live panel draws the network and every running container, shows which one answered you, and has a button that kills it on the spot. The app never goes down.</p>
 
@@ -931,7 +931,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 
 <!-- ================= PROJECT 09 ================= -->
 <section id="watchtower" style="--c:#48e5ff">
-  <p class="eyebrow"><span class="num">09</span> Reliability · Terraform · 16 tests · <a href="https://github.com/ArchitectKeita/aws-atlas-watchtower">view repo →</a></p>
+  <p class="eyebrow"><span class="num">09</span> Reliability · Terraform · 16 tests · <a href="https://github.com/SaintKeita/aws-atlas-watchtower">view repo →</a></p>
   <h2>Watchtower: when the bot goes quiet, someone finds out</h2>
   <p class="sub">A friend runs a profitable futures trading bot. A crashed bot can't report its own crash — so Watchtower treats <em>silence as the alarm.</em> The bot checks in every 30 seconds and reports each closed trade. If it goes quiet while the market is open, its price feed freezes, or the day's losses cross a line, a person hears about it within a minute. It never touches the account: it only listens.</p>
 
@@ -955,7 +955,7 @@ h2::after{background:var(--metal)!important; opacity:.8!important}
 
 <!-- ================= PROJECT 10 ================= -->
 <section id="pipeline" style="--c:#b48cff">
-  <p class="eyebrow"><span class="num">10</span> Delivery · GitHub Actions · Terraform · <a href="https://github.com/ArchitectKeita/aws-cicd-pipeline">view repo →</a></p>
+  <p class="eyebrow"><span class="num">10</span> Delivery · GitHub Actions · Terraform · <a href="https://github.com/SaintKeita/aws-cicd-pipeline">view repo →</a></p>
   <h2>A pipeline that asks before it ships, and undoes itself when it's wrong</h2>
   <p class="sub">Every change takes one road: pull request, tests, lint and a security scan, a Terraform plan posted on the PR, merge, the same checks again, a saved plan, <em>a human approves it,</em> apply exactly that plan, then a smoke test against the live URL. If the new build fails, the pipeline puts the last good version back by itself. There are no AWS access keys anywhere.</p>
 
